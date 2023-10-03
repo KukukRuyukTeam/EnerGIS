@@ -2,7 +2,7 @@
 
 ## About EnerGIS
 
-**EnerGIS** as a Platform for Mapping Alternative Energy Sources and SPKLU with the Support of Artificial Intelligence (AI) in Increasing Education Efficiency Towards Optimal Energy Security
+**EnerGIS** as a Platform for Mapping Alternative Energy Sources and Charging Station with the Support of Artificial Intelligence (AI) in Increasing Education Efficiency Towards Optimal Energy Security
 
 - Mapping PowerPlant
 - Integrated OpenAI ChatGPT
