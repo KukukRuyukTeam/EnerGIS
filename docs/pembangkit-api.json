@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Pembangkit Listrik API",
+        "description": "Pembangkit Listrik API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/pembangkit" : {
+            "post" : {
+                "description" : "Membuat Pembangkit baru",
+                "requestBody": {
+                    "description": "Membuat Pembangkit baru",
+                    "content": {
+                        "application/json" : {
+                            "examples": {
+                                "PLTA Bogor" : {
+                                    "description": "`Memasukkan Pembangkit PLTA Bogor`",
+                                    "value": {
+                                        "nama" : "PLTA Bogor",
+                                        "latitude" : 106.80556714096797,
+                                        "longitude" : -6.594852401823184,
+                                        "lokasi" : "Bogor",
+                                        "deskripsi" : "Merupakan PLTA di bogor",
+                                        "kapasitas" : 30.5,
+                                        "gambar" : "/storage/pembangkit_PLTA_Bogor.png"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama" : {
+                                        "type": "string"
+                                    },
+                                    "latitude" : {
+                                        "type": "number"
+                                    },
+                                    "longitude" : {
+                                        "type": "number"
+                                    },
+                                    "lokasi" : {
+                                        "type": "string"
+                                    },
+                                    "deskripsi" : {
+                                        "type": "string"
+                                    },
+                                    "kapasitas" : {
+                                        "type": "number"
+                                    },
+                                    "gambar" : {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Berhasil membuat Pembangkit baru",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "id" : {
+                                                    "type": "string"
+                                                },
+                                                "nama" : {
+                                                    "type": "string"
+                                                },
+                                                "latitude" : {
+                                                    "type": "number"
+                                                },
+                                                "longitude" : {
+                                                    "type": "number"
+                                                },
+                                                "lokasi" : {
+                                                    "type": "string"
+                                                },
+                                                "deskripsi" : {
+                                                    "type": "string"
+                                                },
+                                                "kapasitas" : {
+                                                    "type": "number"
+                                                },
+                                                "gambar" : {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "code" : {
+                                                    "type": "integer"
+                                                },
+                                                "message" : {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pembangkits" :  {
+            "get": {
+                "description": "Mengambil banyak data pembangkit",
+                "requestBody": {
+                    "description": "Mengambil banyak data pembangkit",
+                    "content": {
+                        "application/json" : {
+                            "examples": {
+                                "Halaman 1" : {
+                                    "description": "`Mengambil data PLTA pada halaman pertama sebanyak 10 buah`",
+                                    "value": {
+                                        "kategori" : "PLTA",
+                                        "page" : 1,
+                                        "page_size" : 10
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "kategori" : {
+                                        "type": "string"
+                                    },
+                                    "page" : {
+                                        "type": "integer"
+                                    },
+                                    "page_size" : {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "kategori" : {
+                                            "type": "string"
+                                        },
+                                        "page" : {
+                                            "type": "integer"
+                                        },
+                                        "page_size" : {
+                                            "type": "integer"
+                                        },
+                                        "total_page" : {
+                                            "type": "integer"
+                                        },
+                                        "total_data" : {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pembangkit/{id}" : {
+            "get" : {
+                "description" : "Mengambil data Pembangkit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Berhasil membuat Pembangkit baru",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "id" : {
+                                                    "type": "string"
+                                                },
+                                                "nama" : {
+                                                    "type": "string"
+                                                },
+                                                "latitude" : {
+                                                    "type": "number"
+                                                },
+                                                "longitude" : {
+                                                    "type": "number"
+                                                },
+                                                "lokasi" : {
+                                                    "type": "string"
+                                                },
+                                                "deskripsi" : {
+                                                    "type": "string"
+                                                },
+                                                "kapasitas" : {
+                                                    "type": "number"
+                                                },
+                                                "gambar" : {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "code" : {
+                                                    "type": "integer"
+                                                },
+                                                "message" : {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "description": "Memperbaharui data Pembangkit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            },
+            "delete": {
+                "description": "Menghapus pembangkit",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Berhasil menghapus data",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id" : {
+                                            "type": "string"
+                                        },
+                                        "is_deleted" : {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
