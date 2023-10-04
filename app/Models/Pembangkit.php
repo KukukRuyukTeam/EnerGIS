@@ -21,4 +21,8 @@ class Pembangkit extends Model
         'kapasitas',
         'gambar'
     ];
+
+    public function plta() {
+        $this->belongsTo(PLTA::class);
+    }
 }
