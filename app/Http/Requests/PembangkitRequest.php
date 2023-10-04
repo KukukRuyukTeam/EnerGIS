@@ -24,9 +24,13 @@ class PembangkitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => ['required', 'max:255'],
-            'latitude' => ['required'],
-            'longitude' => ['required'],
+            'nama' => ['required', 'max:255', 'string'],
+            'latitude' => ['required', 'numeric'],
+            'longitude' => ['required', 'numeric'],
+            'deskripsi' => ['nullable'],
+            'lokasi' => ['nullable'],
+            'kapasitas' => ['numeric'],
+            'gambar' => ['nullable'],
         ];
     }
 
