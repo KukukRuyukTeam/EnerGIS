@@ -19,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::post('pembangkit', [\App\Http\Controllers\PembangkitController::class, 'insertPembangkit']);
+
+Route::prefix('pembangkit')->group(function () {
+    Route::post('/plta', [\App\Http\Controllers\PLTAController::class, 'insertPLTA']);
+    Route::get('/plta/{id}', []);
+    Route::put('/plta/{id}', []);
+    Route::delete('/plta/delete/{id}', []);
+});
+
