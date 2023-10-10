@@ -21,9 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('pembangkit', [\App\Http\Controllers\PembangkitController::class, 'insertPembangkit']);
 
 Route::prefix('pembangkit')->group(function () {
-    Route::post('/plta', [\App\Http\Controllers\PLTAController::class, 'insertPLTA']);
-    Route::get('/plta/{id}', []);
-    Route::put('/plta/{id}', []);
-    Route::delete('/plta/delete/{id}', []);
+    Route::get('/pltas',        [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
+    Route::get("/plta/nearby",  [\App\Http\Controllers\PLTAController::class, 'getPLTANearby']);
+    Route::get('/plta/{id}',    [\App\Http\Controllers\PLTAController::class, 'getPLTAbyID']);
+    Route::post('/plta',        [\App\Http\Controllers\PLTAController::class, 'insertPLTA']);
+    Route::put('/plta/{id}',    [\App\Http\Controllers\PLTAController::class, 'updatePLTA']);
+    Route::delete('/plta/{id}', [\App\Http\Controllers\PLTAController::class, 'deletePLTA']);
 });
 
