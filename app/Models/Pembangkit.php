@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pembangkit extends Model
 {
-    protected $table = "pembangkits";
+    use SoftDeletes;
+    protected $table = "pembangkit";
     protected $primaryKey = "id";
     protected $keyType = 'string';
     public $timestamps = true;
