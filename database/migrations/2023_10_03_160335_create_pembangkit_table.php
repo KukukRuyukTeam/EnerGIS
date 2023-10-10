@@ -12,7 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembangkits', function (Blueprint $table) {
+        DB::raw("CREATE EXTENSION IF NOT EXISTS postgis;");
+
+        Schema::create('pembangkit', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->string('nama', 255)->nullable(false);
             $table->float('latitude')->nullable(false);
@@ -23,6 +25,10 @@ return new class extends Migration
             $table->string('gambar', 255)->nullable();
             $table->timestamps();
         });
+
+        Schema::table('pembangkit', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembangkits');
+        Schema::dropIfExists('pembangkit');
     }
 };

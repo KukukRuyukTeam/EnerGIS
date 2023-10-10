@@ -6,25 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pembangkit extends Model
+class PLTA extends Model
 {
     use SoftDeletes;
-    protected $table = "pembangkit";
-    protected $primaryKey = "id";
+    protected $table = 'plta';
+    protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $timestamps = true;
+    protected array $date = ['deleted_at'];
 
     protected $fillable = [
-        'nama',
-        'longitude',
-        'latitude',
-        'deskripsi',
-        'lokasi',
-        'kapasitas',
-        'gambar'
+        'id_pl',
+        'tipe_pembangkit',
+        'unit_pembangkit'
     ];
 
-    public function plta() {
-        $this->belongsTo(PLTA::class);
+    public function pembangkit() {
+        return $this->hasOne(Pembangkit::class, 'id', 'id_pl');
     }
+
 }
