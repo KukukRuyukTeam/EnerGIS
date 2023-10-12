@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,5 +25,9 @@ class Pembangkit extends Model
 
     public function plta() {
         $this->belongsTo(PLTA::class);
+    }
+
+    public function plts() {
+        $this->belongsTo(PLTS::class);
     }
 }
