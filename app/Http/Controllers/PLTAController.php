@@ -32,9 +32,8 @@ class PLTAController extends Controller
 
         $plta = PLTA::where('id', $id)->with('pembangkit')->first();
 
-        return ["plta" => $plta];
-
-//        return view('plta', ['data' => $plta]);
+        $response = ["plta" => $plta];
+        return $response;
     }
 
     public function getPLTAbyPage(Request $request) {
@@ -47,8 +46,6 @@ class PLTAController extends Controller
         ];
 
         return $response;
-        //        return view('plta', ['data' => $plta]);
-
     }
 
     public function getPLTANearby(Request $request)
@@ -66,10 +63,22 @@ class PLTAController extends Controller
             ->limit(10) // max data yang akan muncul
             ->get();
 
-        return ["pltas" => $plta];
+        $response = ["plta" => $plta];
+        return $response;
     }
 
-    public function updatePLTA(PLTARequest $request, string $id) : JsonResponse
+    public function getPLTAbyQuery(string $query) {
+
+        $perPage = 10;
+        $plta = PLTA::join('pembangkit', 'plta.id_pl', '=',  'pembangkit.id')
+            ->where('nama', 'ILIKE', "%$query%")
+            ->orWhere('lokasi', 'ILIKE', "%$query%")
+        ->paginate($perPage);
+
+        return ['data' => $plta];
+    }
+
+    public function updatePLTA(PLTARequest $request, string $id)
     {
         $data = $request->validated();
 
@@ -77,15 +86,17 @@ class PLTAController extends Controller
         $plta->update($data);
         $plta->pembangkit->update($data);
 
-        return (new JsonResponse($plta, 200));
+        $response = ["plta" => $plta];
+        return $response;
     }
 
-    public function deletePLTA(string $id) : JsonResponse
+    public function deletePLTA(string $id)
     {
         $plta = PLTA::where('id', $id)->first();
         $plta->pembangkit->delete();
         $plta->delete();
 
-        return (new JsonResponse($plta, 201));
+        $response = ["plta" => $plta];
+        return $response;
     }
 }
