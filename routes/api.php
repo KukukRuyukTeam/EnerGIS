@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('pembangkit', [\App\Http\Controllers\PembangkitController::class, 'insertPembangkit']);
 
 Route::prefix('pembangkit')->group(function () {
+    Route::get('/plta/query/{query}', [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
     Route::get('/pltas',        [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
     Route::get("/plta/nearby",  [\App\Http\Controllers\PLTAController::class, 'getPLTANearby']);
     Route::get('/plta/{id}',    [\App\Http\Controllers\PLTAController::class, 'getPLTAbyID']);
