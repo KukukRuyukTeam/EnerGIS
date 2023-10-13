@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SPKLURequest;
 use App\Http\Resources\SPKLUResource;
 use App\Models\SPKLU;
-use App\Models\SPKLUPort;
 use Illuminate\Http\Request;
 
 
