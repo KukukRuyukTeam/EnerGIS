@@ -4,9 +4,6 @@
 
 **EnerGIS** as a Platform for Mapping Alternative Energy Sources and Charging Station with the Support of Artificial Intelligence (AI) in Increasing Education Efficiency Towards Optimal Energy Security
 
-- Mapping PowerPlant
-- Integrated OpenAI ChatGPT
-
 ### Meet the Team
 
 - **[Abiyyu Umar Thoyyib](https://github.com/Tivedo)**
@@ -21,14 +18,18 @@
 <a href="https://postgresql.org" target="_blank"><img src="https://computerscience.id/wp-content/uploads/2015/08/postgresql-logo.png" width=200 alt="PostgreSQL Logo"></a> 
 <a href="https://leafletjs.com" target="_blank"><img src="https://leafletjs.com/docs/images/logo.png" width=200 alt="Leaflet Logo"></a>
 
+## Feature Overview
+- Mapping PowerPlant
+- Integrated OpenAI ChatGPT
+- Admin can create, update, and delete the map
 
 ## Getting Started
-EnerGIS run in laravel framework, and using composer as package manager
+EnerGIS run in laravel framework, composer as package manager, and using PostgreSQL as database
 
 ### Requirement
-- **Laravel ^10.10**
+- **Laravel ^10.10+**
 - **Composer** 
-- **PostgreSQL** 
+- **PostgreSQL 11.0+** 
 
 ### Quickstart
 
@@ -46,7 +47,7 @@ Before run the server, we need to migrate the database
 php artisan migrate
 ```
 
-After install all the dependency and create the init the database, run the server locally
+After install all the dependency and migrate the database, now we run the server locally
 ```bash
 php artisan serve
 ```
