@@ -14,6 +14,8 @@ abstract class TestCase extends BaseTestCase
         DB::delete("DELETE FROM pembangkit");
         DB::delete("DELETE FROM plta");
         DB::delete("DELETE FROM plts");
+        DB::delete("DELETE FROM spklu");
+        DB::delete("DELETE FROM spklu_port");
     }
 
     use CreatesApplication;
