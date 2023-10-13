@@ -37,7 +37,7 @@ class PLTSController extends Controller
     public function getPLTSbyPage()
     {
         $perPage = 10;
-        $plts = PLTS::paginate($perPage);
+        $plts = PLTS::join('pembangkit', 'plts.id_pl', '=', 'pembangkit.id')->paginate($perPage);
 
         $response = [
             "plts" => $plts

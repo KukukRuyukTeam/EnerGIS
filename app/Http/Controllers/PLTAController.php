@@ -39,7 +39,7 @@ class PLTAController extends Controller
     public function getPLTAbyPage(Request $request) {
 
         $perPage = 10;
-        $plta = PLTA::paginate($perPage);
+        $plta = PLTA::join('pembangkit', 'plta.id_pl', '=', 'pembangkit.id')->paginate($perPage);
 
         $response = [
             "plta" => $plta,
