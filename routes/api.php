@@ -36,6 +36,14 @@ Route::prefix('pembangkit')->group(function () {
     Route::post('/plts',                [\App\Http\Controllers\PLTSController::class, 'insertPLTS']);
     Route::put('/plts/{id}',            [\App\Http\Controllers\PLTSController::class, 'updatePLTS']);
     Route::delete('/plts/{id}',         [\App\Http\Controllers\PLTSController::class, 'deletePLTS']);
+
+    Route::get('/pltbm/query/{query}',   [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyQuery']);
+    Route::get('/pltbms/',               [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyPage']);
+    Route::get('/pltbm/nearby',          [\App\Http\Controllers\PLTBmController::class, 'getPLTBmNearby']);
+    Route::get('/pltbm/{id}',            [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyID']);
+    Route::post('/pltbm',                [\App\Http\Controllers\PLTBmController::class, 'insertPLTBm']);
+    Route::put('/pltbm/{id}',            [\App\Http\Controllers\PLTBmController::class, 'updatePLTBm']);
+    Route::delete('/pltbm/{id}',         [\App\Http\Controllers\PLTBmController::class, 'deletePLTBm']);
 });
 
 
