@@ -52,6 +52,14 @@ Route::prefix('pembangkit')->group(function () {
     Route::post('/pltm',                [\App\Http\Controllers\PLTMController::class, 'insertPLTM']);
     Route::put('/pltm/{id}',            [\App\Http\Controllers\PLTMController::class, 'updatePLTM']);
     Route::delete('/pltm/{id}',         [\App\Http\Controllers\PLTMController::class, 'deletePLTM']);
+
+    Route::get('/pltmh/query/{query}',   [\App\Http\Controllers\PLTMHController::class, 'getPLTMbyQuery']);
+    Route::get('/pltmhs/',               [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyPage']);
+    Route::get('/pltmh/nearby',          [\App\Http\Controllers\PLTMHController::class, 'getPLTMHNearby']);
+    Route::get('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyID']);
+    Route::post('/pltmh',                [\App\Http\Controllers\PLTMHController::class, 'insertPLTMH']);
+    Route::put('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
+    Route::delete('/pltmh/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
 });
 
 
