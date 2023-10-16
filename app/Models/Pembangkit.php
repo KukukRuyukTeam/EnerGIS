@@ -30,4 +30,9 @@ class Pembangkit extends Model
     public function plts() {
         $this->belongsTo(PLTS::class);
     }
+
+    public function pltp()
+    {
+        return $this->hasOne(PLTP::class, 'id_pl', 'id');
+    }
 }

@@ -17,6 +17,7 @@ abstract class TestCase extends BaseTestCase
         DB::delete("DELETE FROM pltm");
         DB::delete("DELETE FROM pltmh");
         DB::delete("DELETE FROM pltbm");
+        DB::delete("DELETE FROM pltp");
         DB::delete("DELETE FROM spklu");
         DB::delete("DELETE FROM spklu_port");
     }

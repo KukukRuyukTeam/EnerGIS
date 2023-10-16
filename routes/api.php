@@ -60,6 +60,13 @@ Route::prefix('pembangkit')->group(function () {
     Route::post('/pltmh',                [\App\Http\Controllers\PLTMHController::class, 'insertPLTMH']);
     Route::put('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
     Route::delete('/pltmh/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
+
+    Route::get('/pltp/nearby',          [\App\Http\Controllers\PLTPController::class, 'getPLTPNearby']);
+    Route::get('/pltps',                [\App\Http\Controllers\PLTPController::class, 'getPLTPbyPage']);
+    Route::get('/pltp/{id}',            [\App\Http\Controllers\PLTPController::class, 'getPLTPbyID']);
+    Route::post('/pltp',                [\App\Http\Controllers\PLTPController::class, 'insertPLTP']);
+    Route::put('/pltp/{id}',            [\App\Http\Controllers\PLTPController::class, 'updatePLTP']);
+    Route::delete('/pltp/{id}',         [\App\Http\Controllers\PLTPController::class, 'deletePLTP']);
 });
 
 
