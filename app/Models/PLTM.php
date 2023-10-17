@@ -20,6 +20,6 @@ class PLTM extends Model
     ];
 
     public function pembangkit() {
-        return $this->hasOne(Pembangkit::class, 'id', 'id_pl');
+        return $this->belongsTo(Pembangkit::class, 'id', 'id_pl');
     }
 }
