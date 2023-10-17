@@ -14,35 +14,32 @@ class PLTSController extends Controller
     {
         $data = $request->validated();
 
-        $newPLTS = new PLTS($data);
-        $newPembangkit = new Pembangkit($data);
-        $newPembangkit->save();
+        $newPembangkit      = new Pembangkit($data);
+        $statusPembangkit   = $newPembangkit->save();
+        $statusPLTS         = $newPembangkit->plts()->save(new PLTS($data));
 
-        $newPLTS->id_pl = $newPembangkit->id;
-        $newPLTS->save();
-
-        $response = new PLTSResource($newPLTS);
-        $response->pembangkit = $newPembangkit->getAttributes();
-        return $response;
+        return [
+            "status" => ($statusPembangkit && $statusPLTS),
+            "id" => $newPembangkit->id
+        ];
     }
 
     public function getPLTSbyID(string $id)
     {
-        $plts = PLTS::where('id', $id)->with('pembangkit')->first();
-        $response = ["plts" => $plts];
+        $pembangkit = Pembangkit::where('id', $id)
+            ->with('plts')
+            ->first();
 
-        return $response;
+        return ["data" => $pembangkit];
     }
 
     public function getPLTSbyPage()
     {
         $perPage = 10;
-        $plts = PLTS::join('pembangkit', 'plts.id_pl', '=', 'pembangkit.id')->paginate($perPage);
+        $pembangkit = Pembangkit::with('plts')
+            ->paginate($perPage);
 
-        $response = [
-            "plts" => $plts
-        ];
-        return $response;
+        return $pembangkit;
     }
 
     public function  getPLTSNearby(Request $request)
@@ -51,7 +48,7 @@ class PLTSController extends Controller
         $latitude =  $request->query('latitude');
         $distance =  $request->query('distance'); //Meter
 
-        $plta = PLTS::join('pembangkit', 'plts.id_pl', '=', 'pembangkit.id')
+        $pembangkit = Pembangkit::with('plts')
             ->whereRaw("ST_Distance(
                 ST_MakePoint($longitude, $latitude)::geography,
                 ST_MakePoint(longitude, latitude)::geography
@@ -59,40 +56,37 @@ class PLTSController extends Controller
             ->limit(10) // max data yang akan muncul
             ->get();
 
-        $response = ["plts" => $plta];
-        return $response;
+        return ["data" => $pembangkit];
     }
 
     public function getPLTSbyQuery(string $query)
     {
         $perPage = 10;
-        $plts = PLTS::join('pembangkit', 'plts.id_pl', '=',  'pembangkit.id')
+        $pembangkit = Pembangkit::with('plts')
             ->where('nama', 'ILIKE', "%$query%")
             ->orWhere('lokasi', 'ILIKE', "%$query%")
             ->paginate($perPage);
 
-        return ['data' => $plts];
+        return ['data' => $pembangkit];
     }
 
     public function updatePLTS(PLTSRequest $request, string $id)
     {
         $data = $request->validated();
 
-        $plts = PLTS::where('id', $id)->first();
-        $plts->update($data);
-        $plts->pembangkit->update($data);
+        $pembangkit         = Pembangkit::where('id', $id)->first();
+        $statusPembangkit   = $pembangkit->update($data);
+        $statusPLTS         = $pembangkit->plts->update($data);
 
-        $response = ["plts" => $plts];
-        return $response;
+        return ["status" => ($statusPembangkit && $statusPLTS)];
     }
 
     public function deletePLTS(string $id)
     {
-        $plts = PLTS::where('id', $id)->first();
-        $plts->pembangkit->delete();
-        $plts->delete();
+        $plts               = Pembangkit::where('id', $id)->first();
+        $statusPLTS         = $plts->plts->delete();
+        $statusPembangkit   = $plts->delete();
 
-        $response = ["data" => $plts];
-        return $response;
+        return ["status" => ($statusPembangkit && $statusPLTS)];
     }
 }
