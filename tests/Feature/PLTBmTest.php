@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class PLTBmTest extends TestCase
@@ -22,9 +23,11 @@ class PLTBmTest extends TestCase
             'lokasi' => 'Bogor',
             'kapasitas' => 30.5,
             'gambar' => 'testGambar.png'
-        ]);
+        ])
+            ->assertJson([
+                "status" => true
+            ]);
 
-//        $response->dump();
         return $response;
     }
 
@@ -40,25 +43,30 @@ class PLTBmTest extends TestCase
             'lokasi' => 'Bogor',
             'kapasitas' => 30.5,
             'gambar' => 'testGambar.png'
-        ]);
+        ])
+            ->assertJson([
+                "status" => true
+            ]);
 
-        $response->dump();
     }
 
     public function testDelete(): void
     {
         $pltbm = $this->testInsertSuccess();
-        $response = $this->delete('/api/pembangkit/pltbm/'. $pltbm['id']);
-
-        $response->dump();
+        $response = $this->delete('/api/pembangkit/pltbm/'. $pltbm['id'])
+            ->assertJson([
+                "status" => true
+            ]);
     }
 
     public function testFindNear(): void
     {
         $this->testInsertSuccess();
         $response = $this->get('/api/pembangkit/pltbm/nearby?'.
-            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578');
-
-        $response->dump();
+            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578'
+        )
+            ->assertJson(fn (AssertableJson $json) =>
+                $json->whereType('data', 'array|min:1')
+            );
     }
 }
