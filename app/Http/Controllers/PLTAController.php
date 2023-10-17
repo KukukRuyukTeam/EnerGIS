@@ -3,49 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PLTARequest;
-use App\Http\Resources\PLTAResource;
 use App\Models\Pembangkit;
 use App\Models\PLTA;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PLTAController extends Controller
 {
-    public function insertPLTA(PLTARequest $request): JsonResponse
+    public function insertPLTA(PLTARequest $request)
     {
         $data = $request->validated();
 
-        $newPLTA = new PLTA($data);
-        $newPembangkit = new Pembangkit($data);
-        $newPembangkit->save();
+        $newPembangkit      = new Pembangkit($data);
+        $statusPembangkit   = $newPembangkit->save();
+        $statusPLTA         = $newPembangkit->plta()->save(new PLTA($data));
 
-        $newPLTA->id_pl = $newPembangkit->id;
-        $newPLTA->save();
-
-        $responsePLTA = new PLTAResource($newPLTA);
-        $responsePLTA->pembangkit = $newPembangkit->getAttributes();
-
-        return ($responsePLTA)->response()->setStatusCode(201);
+        return [
+            "status" => ($statusPLTA && $statusPembangkit),
+            "id" => $newPembangkit->id
+        ];
     }
 
     public function getPLTAbyID(Request $request, string $id) {
 
-        $plta = PLTA::where('id', $id)->with('pembangkit')->first();
+        $pembangkit = Pembangkit::where('id', '=', $id)
+            ->plta()
+            ->first();
 
-        $response = ["plta" => $plta];
-        return $response;
+        return ["data" => $pembangkit];
     }
 
     public function getPLTAbyPage(Request $request) {
 
         $perPage = 10;
-        $plta = PLTA::join('pembangkit', 'plta.id_pl', '=', 'pembangkit.id')->paginate($perPage);
+        $pembangkit = Pembangkit::with('plta')
+            ->paginate($perPage);
 
-        $response = [
-            "plta" => $plta,
-        ];
-
-        return $response;
+        return $pembangkit;
     }
 
     public function getPLTANearby(Request $request)
@@ -54,49 +47,45 @@ class PLTAController extends Controller
         $latitude =  $request->query('latitude');
         $distance =  $request->query('distance'); //Meter
 
-        $plta = PLTA::join('pembangkit', 'plta.id_pl', '=', 'pembangkit.id')
+        $pembangkit = Pembangkit::with('plta')
             ->whereRaw("ST_Distance(
                 ST_MakePoint($longitude, $latitude)::geography,
                 ST_MakePoint(longitude, latitude)::geography
             ) <= $distance")
-            ->orderByRaw('RANDOM()')
             ->limit(10) // max data yang akan muncul
             ->get();
 
-        $response = ["plta" => $plta];
-        return $response;
+        return ["data" => $pembangkit];
     }
 
     public function getPLTAbyQuery(string $query) {
 
-        $perPage = 10;
-        $plta = PLTA::join('pembangkit', 'plta.id_pl', '=',  'pembangkit.id')
+        $perPage    = 10;
+        $pembangkit = Pembangkit::with('plta')
             ->where('nama', 'ILIKE', "%$query%")
             ->orWhere('lokasi', 'ILIKE', "%$query%")
         ->paginate($perPage);
 
-        return ['data' => $plta];
+        return ['data' => $pembangkit];
     }
 
     public function updatePLTA(PLTARequest $request, string $id)
     {
         $data = $request->validated();
 
-        $plta = PLTA::where('id', $id)->first();
-        $plta->update($data);
-        $plta->pembangkit->update($data);
+        $pembangkit         = Pembangkit::where('id','=', $id)->first();
+        $statusPembangkit   = $pembangkit->update($data);
+        $statusPLTA         = $pembangkit->plta->update($data);
 
-        $response = ["plta" => $plta];
-        return $response;
+        return ["status" => ($statusPembangkit && $statusPLTA)];
     }
 
     public function deletePLTA(string $id)
     {
-        $plta = PLTA::where('id', $id)->first();
-        $plta->pembangkit->delete();
-        $plta->delete();
+        $pembangkit         = Pembangkit::where('id', '=', $id)->first();
+        $statusPembangkit   = $pembangkit->plta->delete();
+        $statusPLTA         = $pembangkit->delete();
 
-        $response = ["plta" => $plta];
-        return $response;
+        return ["status" => ($statusPLTA && $statusPembangkit)];
     }
 }

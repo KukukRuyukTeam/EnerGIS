@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class PLTSTest extends TestCase
@@ -13,7 +14,7 @@ class PLTSTest extends TestCase
      */
     public function testInsertSuccess()
     {
-        for ($i=0; $i<50; $i++) {
+
             $response = $this->post('/api/pembangkit/plts', [
                 'nama' => 'PLTS Depok',
                 'unit_panel' => 'Panel V2',
@@ -23,11 +24,12 @@ class PLTSTest extends TestCase
                 'lokasi' => 'Depok',
                 'kapasitas' => 30.5,
                 'gambar' => 'testGambar.png'
-            ]);
-        }
+            ])
+                ->assertJson([
+                    "status" => true
+                ]);
 
-//            $response->dump();
-            return $response['data']["id"];
+            return $response["id"];
     }
 
     public function testUpdate(): void
@@ -42,24 +44,30 @@ class PLTSTest extends TestCase
             'lokasi' => 'Depok',
             'kapasitas' => 30.5,
             'gambar' => 'testGambar.png'
-        ]);
+        ])
+            ->assertJson([
+                "status" => true
+            ]);
 
-        $response->dump();
     }
 
     public function testDelete(): void
     {
         $id = $this->testInsertSuccess();
-        $response = $this->delete('/api/pembangkit/plts/' . $id);
-
-        $response->dump();
+        $response = $this->delete('/api/pembangkit/plts/' . $id)
+            ->assertJson([
+                "status" => true
+            ]);
     }
 
     public function  testFindNear(): void
     {
         $this->testInsertSuccess();
         $response = $this->get('/api/pembangkit/plts/nearby?' .
-            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578');
-        echo $response->dump();
+            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578'
+        )
+            ->assertJson(fn (AssertableJson $json) =>
+                $json->whereType('data', 'array|min:1')
+            );
     }
 }

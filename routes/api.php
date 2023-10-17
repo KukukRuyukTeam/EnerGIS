@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('pembangkit', [\App\Http\Controllers\PembangkitController::class, 'insertPembangkit']);
-
 Route::prefix('pembangkit')->group(function () {
     Route::get('/plta/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
     Route::get('/pltas',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
@@ -61,6 +59,7 @@ Route::prefix('pembangkit')->group(function () {
     Route::put('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
     Route::delete('/pltmh/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
 
+    Route::get('/pltp/query/{query}',   [\App\Http\Controllers\PLTPController::class, 'getPLTPbyQuery']);
     Route::get('/pltp/nearby',          [\App\Http\Controllers\PLTPController::class, 'getPLTPNearby']);
     Route::get('/pltps',                [\App\Http\Controllers\PLTPController::class, 'getPLTPbyPage']);
     Route::get('/pltp/{id}',            [\App\Http\Controllers\PLTPController::class, 'getPLTPbyID']);

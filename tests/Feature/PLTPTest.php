@@ -23,9 +23,11 @@ class PLTPTest extends TestCase
             'lokasi' => 'Bogor',
             'kapasitas' => 30.5,
             'gambar' => 'testGambar.png'
-        ]);
+        ])
+            ->assertJson([
+                "status" => true
+            ]);
 
-//        $response->dump();
         return $response["id"];
     }
 

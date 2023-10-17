@@ -24,11 +24,11 @@ class Pembangkit extends Model
     ];
 
     public function plta() {
-        $this->belongsTo(PLTA::class);
+        return $this->hasOne(PLTA::class, 'id_pl', 'id');
     }
 
     public function plts() {
-        $this->belongsTo(PLTS::class);
+        return $this->hasOne(PLTS::class, 'id_pl', 'id');
     }
 
     public function pltp()
@@ -39,5 +39,20 @@ class Pembangkit extends Model
     public function pltb()
     {
         return $this->hasOne(PLTB::class, 'id_pl', 'id');
+    }
+
+    public function pltbm()
+    {
+        return $this->hasOne(PLTBm::class, 'id_pl', 'id');
+    }
+
+    public function pltm()
+    {
+        return $this->hasOne(PLTM::class, 'id_pl', 'id');
+    }
+
+    public function pltmh()
+    {
+        return $this->hasOne(PLTMH::class, 'id_pl', 'id');
     }
 }
