@@ -15,33 +15,30 @@ class PLTMHController extends Controller
 
         $newPembangkit = new Pembangkit($data);
         $statusPembangkit = $newPembangkit->save();
-
-        $newPLTMH = new PLTMH();
-        $newPLTMH->id_pl = $newPembangkit->id;
-        $statusPLTMH = $newPLTMH->save();
+        $statusPLTMH = $newPembangkit->pltmh()->save(new PLTMH($data));
 
         return [
             "status" => ($statusPembangkit && $statusPLTMH),
-            "id" => $newPLTMH->id
+            "id" => $newPembangkit->id
         ];
     }
 
     public function getPLTMHbyID(string $id)
     {
-        $pltmh = PLTMH::where('pltmh..id', '=', $id)
-            ->with('pembangkit')
+        $pembangkit = Pembangkit::where('pltmh.id', '=', $id)
+            ->pltmh()
             ->first();
 
-        return ["data" => $pltmh];
+        return ["data" => $pembangkit];
     }
 
     public function getPLTMHbyPage()
     {
         $perPage = 10;
-        $pltmh = PLTMH::join('pembangkit', 'pltmh.id_pl', '=', 'pembangkit.id')
+        $pembangkit = Pembangkit::with('pltmh')
             ->paginate($perPage);
 
-        return $pltmh;
+        return $pembangkit;
     }
 
     public function getPLTMHNearby(Request $request)
@@ -50,7 +47,7 @@ class PLTMHController extends Controller
         $latitude =  $request->query('latitude');
         $distance =  $request->query('distance'); //Meter
 
-        $pltmh = PLTMH::join('pembangkit', 'pltmh.id_pl', '=', 'pembangkit.id')
+        $pembangkit = Pembangkit::with('pltmh')
             ->whereRaw("ST_Distance(
                 ST_MakePoint($longitude, $latitude)::geography,
                 ST_MakePoint(longitude, latitude)::geography
@@ -58,13 +55,13 @@ class PLTMHController extends Controller
             ->limit(10) // max data yang akan muncul
             ->get();
 
-        return ["data" => $pltmh];
+        return ["data" => $pembangkit];
     }
 
     public function getPLTMbyQuery(string $query)
     {
         $perPage = 10;
-        $pltmh = PLTMH::join('pembangkit', 'pltmh.id_pl', '=',  'pembangkit.id')
+        $pltmh = Pembangkit::with('pltmh')
             ->where('nama', 'ILIKE', "%$query%")
             ->orWhere('lokasi', 'ILIKE', "%$query%")
             ->paginate($perPage);
@@ -75,19 +72,19 @@ class PLTMHController extends Controller
     public function updatePLTMH(PLTMHRequest $request, string $id)
     {
         $data = $request->validated();
-        $pltmh = PLTMH::where('id', '=', $id)
+        $pembangkit = Pembangkit::where('id', '=', $id)
             ->first();
-        $statusPembangkit = $pltmh->pembangkit->update($data);
+        $statusPembangkit = $pembangkit->pltmh->update($data);
 
         return ["status" => $statusPembangkit];
     }
 
     public function deletePLTMH(string $id)
     {
-        $pltmh = PLTMH::where('id', '=', $id)
+        $pembangkit = Pembangkit::where('id', '=', $id)
             ->first();
-        $statusPembangkit = $pltmh->pembangkit->delete();
-        $statusPLTMH = $pltmh->delete();
+        $statusPembangkit = $pembangkit->pltmh->delete();
+        $statusPLTMH = $pembangkit->delete();
 
         return ["status" => ($statusPembangkit && $statusPLTMH)];
     }

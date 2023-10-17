@@ -50,4 +50,9 @@ class Pembangkit extends Model
     {
         return $this->hasOne(PLTM::class, 'id_pl', 'id');
     }
+
+    public function pltmh()
+    {
+        return $this->hasOne(PLTMH::class, 'id_pl', 'id');
+    }
 }
