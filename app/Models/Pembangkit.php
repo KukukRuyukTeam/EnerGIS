@@ -24,7 +24,7 @@ class Pembangkit extends Model
     ];
 
     public function plta() {
-        $this->belongsTo(PLTA::class);
+        return $this->hasOne(PLTA::class, 'id_pl', 'id');
     }
 
     public function plts() {

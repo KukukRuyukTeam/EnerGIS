@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class PLTATest extends TestCase
@@ -13,7 +14,6 @@ class PLTATest extends TestCase
      */
     public function testInsertSuccess()
     {
-        for ($i=0; $i<50; $i++) {
             $response = $this->post('/api/pembangkit/plta', [
                 'nama' => 'PLTA Bogor',
                 'tipe_pembangkit' => 'Generator',
@@ -25,20 +25,11 @@ class PLTATest extends TestCase
                 'kapasitas' => 30.5,
                 'gambar' => 'testGambar.png'
             ])
-                ->assertStatus(201)
-                ->assertJsonStructure([  // Bisa juga cek id kalau tidak kosong
-                    "data" => [
-                        'id',
-                        'id_pl',
-                        'tipe_pembangkit',
-                        'unit_pembangkit',
-                        'pembangkit'
-                    ]
+                ->assertJson([
+                    "status" => true
                 ]);
 
-
-        }
-        return $response['data']['id'];
+        return $response['id'];
     }
 
     public function testInsertFailed(): void
@@ -79,24 +70,30 @@ class PLTATest extends TestCase
             'lokasi' => 'Bogor',
             'kapasitas' => 30.5,
             'gambar' => 'testGambar.png'
+        ])
+        ->assertJson([
+            "status" => true
         ]);
 
-        echo $response->dump();
     }
 
     public function testDelete(): void
     {
         $id = $this->testInsertSuccess();
-        $response = $this->delete('/api/pembangkit/plta/' . $id);
+        $this->delete('/api/pembangkit/plta/' . $id)
+        ->assertJson([
+            "status" => true
+        ]);
 
-        echo $response->dump();
     }
 
     public function  testFindNear(): void
     {
         $this->testInsertSuccess();
-        $response = $this->get('/api/pembangkit/plta/nearby?' .
-            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578');
-        echo $response->dump();
+        $this->get('/api/pembangkit/plta/nearby?' .
+            'distance=1000000&latitude=106.81431231326&longitude=-6.5891695608578'
+        )->assertJson(fn (AssertableJson $json) =>
+            $json->whereType('data', 'array|min:1')
+        );
     }
 }
