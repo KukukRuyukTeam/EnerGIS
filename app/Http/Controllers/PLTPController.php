@@ -14,10 +14,13 @@ class PLTPController extends Controller
         $data = $request->validated();
 
         $newPembangkit = new Pembangkit($data);
-        $newPembangkit->save();
-        $pltp = $newPembangkit->pltp()->create($data);
+        $statusPembangkit = $newPembangkit->save();
+        $statusPLTP = $newPembangkit->pltp()->save(new PLTP($data));
 
-        return ["id" => $newPembangkit->id, $pltp];
+        return [
+            "status" => ($statusPembangkit && $statusPLTP),
+            "id" => $newPembangkit->id
+        ];
     }
 
     public function getPLTPbyID(string $id)
@@ -35,6 +38,17 @@ class PLTPController extends Controller
             ->paginate($perPage);
 
         return $pembangkit;
+    }
+
+    public function getPLTPbyQuery(string $query)
+    {
+        $perPage = 10;
+        $pembangkit = Pembangkit::with('pltp')
+            ->where('nama', 'ILIKE', "%$query%")
+            ->orWhere('lokasi', 'ILIKE', "%$query%")
+            ->paginate($perPage);
+
+        return ["data" => $pembangkit];
     }
 
     public function getPLTPNearby(Request $request)
