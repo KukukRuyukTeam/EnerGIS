@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('pembangkit', [\App\Http\Controllers\PembangkitController::class, 'insertPembangkit']);
-
 Route::prefix('pembangkit')->group(function () {
     Route::get('/plta/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
     Route::get('/pltas',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
