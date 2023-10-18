@@ -27,7 +27,7 @@ class PLTBmController extends Controller
     public function getPLTBmbyID(string $id)
     {
         $pembangkit = Pembangkit::where('id', '=', $id)
-            ->pltbm()
+            ->with('pltbm')
             ->first();
 
         return ["data" => $pembangkit];

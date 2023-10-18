@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\AdminSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -14,20 +15,21 @@ class PLTATest extends TestCase
      */
     public function testInsertSuccess()
     {
-            $response = $this->post('/api/pembangkit/plta', [
-                'nama' => 'PLTA Bogor',
-                'tipe_pembangkit' => 'Generator',
-                'unit_pembangkit' => 'Generator 1',
-                'longitude' => -6.589169556757834 + ("-0.00000000" . random_int(1, 50)),
-                'latitude' => 106.8061123132633 + ("0.00" . random_int(50, 200)),
-                'deskripsi' => "Adalah PLTA",
-                'lokasi' => 'Bogor',
-                'kapasitas' => 30.5,
-                'gambar' => 'testGambar.png'
-            ])
-                ->assertJson([
-                    "status" => true
-                ]);
+        $this->seed([AdminSeeder::class]);
+        $response = $this->post('/api/pembangkit/plta', [
+            'nama' => 'PLTA Bogor',
+            'tipe_pembangkit' => 'Generator',
+            'unit_pembangkit' => 'Generator 1',
+            'longitude' => -6.589169556757834 + ("-0.00000000" . random_int(1, 50)),
+            'latitude' => 106.8061123132633 + ("0.00" . random_int(50, 200)),
+            'deskripsi' => "Adalah PLTA",
+            'lokasi' => 'Bogor',
+            'kapasitas' => 30.5,
+            'gambar' => 'testGambar.png'
+        ], headers: ['Authorization' => 'test'])
+            ->assertJson([
+                "status" => true
+            ]);
 
         return $response['id'];
     }
