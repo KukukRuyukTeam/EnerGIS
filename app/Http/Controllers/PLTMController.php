@@ -25,8 +25,9 @@ class PLTMController extends Controller
 
     public function getPLTMbyID(string $id)
     {
-        $pembangkit = Pembangkit::with('pltm')
-            ->with('pembangkit')->first();
+        $pembangkit = Pembangkit::where('id', '=', $id)
+            ->with('pltm')
+            ->first();
 
         return ["data" => $pembangkit];
     }

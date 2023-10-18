@@ -26,7 +26,7 @@ class PLTMHController extends Controller
     public function getPLTMHbyID(string $id)
     {
         $pembangkit = Pembangkit::where('pltmh.id', '=', $id)
-            ->pltmh()
+            ->with('pltmh')
             ->first();
 
         return ["data" => $pembangkit];

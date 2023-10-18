@@ -26,7 +26,7 @@ class PLTAController extends Controller
     public function getPLTAbyID(Request $request, string $id) {
 
         $pembangkit = Pembangkit::where('id', '=', $id)
-            ->plta()
+            ->with('plta')
             ->first();
 
         return ["data" => $pembangkit];
