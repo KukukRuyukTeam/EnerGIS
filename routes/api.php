@@ -61,40 +61,56 @@ Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(functi
 
 // [[ Public function ]] //
 Route::prefix('pembangkit')->group(function () {
-    Route::get('/plta/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
-    Route::get('/pltas',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
-    Route::get("/plta/nearby",          [\App\Http\Controllers\PLTAController::class, 'getPLTANearby']);
-    Route::get('/plta/{id}',            [\App\Http\Controllers\PLTAController::class, 'getPLTAbyID']);
 
-    Route::get('/plts/query/{query}',   [\App\Http\Controllers\PLTSController::class, 'getPLTSbyQuery']);
-    Route::get('/pltss/',               [\App\Http\Controllers\PLTSController::class, 'getPLTSbyPage']);
-    Route::get('/plts/nearby',          [\App\Http\Controllers\PLTSController::class, 'getPLTSNearby']);
-    Route::get('/plts/{id}',            [\App\Http\Controllers\PLTSController::class, 'getPLTSbyID']);
+    Route::prefix('plta')->group(function () {
+        Route::get('/',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
+        Route::get("/nearby",          [\App\Http\Controllers\PLTAController::class, 'getPLTANearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTAController::class, 'getPLTAbyID']);
+    });
 
-    Route::get('/pltbm/query/{query}',   [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyQuery']);
-    Route::get('/pltbms/',               [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyPage']);
-    Route::get('/pltbm/nearby',          [\App\Http\Controllers\PLTBmController::class, 'getPLTBmNearby']);
-    Route::get('/pltbm/{id}',            [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyID']);
+    Route::prefix('plts')->group(function () {
+        Route::get('/',               [\App\Http\Controllers\PLTSController::class, 'getPLTSbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTSController::class, 'getPLTSbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTSController::class, 'getPLTSNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTSController::class, 'getPLTSbyID']);
+    });
 
-    Route::get('/pltm/query/{query}',   [\App\Http\Controllers\PLTMController::class, 'getPLTMbyQuery']);
-    Route::get('/pltms/',               [\App\Http\Controllers\PLTMController::class, 'getPLTMbyPage']);
-    Route::get('/pltm/nearby',          [\App\Http\Controllers\PLTMController::class, 'getPLTMNearby']);
-    Route::get('/pltm/{id}',            [\App\Http\Controllers\PLTMController::class, 'getPLTMbyID']);
+    Route::prefix('pltbm')->group(function () {
+        Route::get('/',               [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTBmController::class, 'getPLTBmNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyID']);
+    });
 
-    Route::get('/pltmh/query/{query}',   [\App\Http\Controllers\PLTMHController::class, 'getPLTMbyQuery']);
-    Route::get('/pltmhs/',               [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyPage']);
-    Route::get('/pltmh/nearby',          [\App\Http\Controllers\PLTMHController::class, 'getPLTMHNearby']);
-    Route::get('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyID']);
+    Route::prefix('pltm')->group(function () {
+        Route::get('/',               [\App\Http\Controllers\PLTMController::class, 'getPLTMbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTMController::class, 'getPLTMbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTMController::class, 'getPLTMNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTMController::class, 'getPLTMbyID']);
+    });
 
-    Route::get('/pltp/query/{query}',   [\App\Http\Controllers\PLTPController::class, 'getPLTPbyQuery']);
-    Route::get('/pltp/nearby',          [\App\Http\Controllers\PLTPController::class, 'getPLTPNearby']);
-    Route::get('/pltps',                [\App\Http\Controllers\PLTPController::class, 'getPLTPbyPage']);
-    Route::get('/pltp/{id}',            [\App\Http\Controllers\PLTPController::class, 'getPLTPbyID']);
+    Route::prefix('pltmh')->group(function () {
+        Route::get('/',               [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTMHController::class, 'getPLTMbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTMHController::class, 'getPLTMHNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyID']);
+    });
 
-    Route::get('/pltb/query/{query}',   [\App\Http\Controllers\PLTBController::class, 'getPLTBbyQuery']);
-    Route::get('/pltbs/',               [\App\Http\Controllers\PLTBController::class, 'getPLTBbyPage']);
-    Route::get('/pltb/nearby',          [\App\Http\Controllers\PLTBController::class, 'getPLTBNearby']);
-    Route::get('/pltb/{id}',            [\App\Http\Controllers\PLTBController::class, 'getPLTBbyID']);
+    Route::prefix('pltp')->group(function () {
+        Route::get('/',                [\App\Http\Controllers\PLTPController::class, 'getPLTPbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTPController::class, 'getPLTPbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTPController::class, 'getPLTPNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTPController::class, 'getPLTPbyID']);
+    });
+
+    Route::prefix('pltb')->group(function () {
+        Route::get('/',               [\App\Http\Controllers\PLTBController::class, 'getPLTBbyPage']);
+        Route::get('/query/{query}',   [\App\Http\Controllers\PLTBController::class, 'getPLTBbyQuery']);
+        Route::get('/nearby',          [\App\Http\Controllers\PLTBController::class, 'getPLTBNearby']);
+        Route::get('/{id}',            [\App\Http\Controllers\PLTBController::class, 'getPLTBbyID']);
+    });
+
 });
 
 
