@@ -18,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::post('/admin/login',             [\App\Http\Controllers\AdminController::class, 'loginAdmin']);
+Route::post('/admin',                   [\App\Http\Controllers\AdminController::class, 'registerAdmin']);
+
+Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
+    Route::get('/admin/current',        [\App\Http\Controllers\AdminController::class, 'get']);
+    Route::post('/admin/logout',        [\App\Http\Controllers\AdminController::class, 'logoutAdmin']);
+});
+
 Route::prefix('pembangkit')->group(function () {
     Route::get('/plta/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
     Route::get('/pltas',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
