@@ -115,7 +115,9 @@ Route::prefix('pembangkit')->group(function () {
 
 Route::post('/chat',                    [\App\Http\Controllers\ChatAIController::class, 'getAnswear']);
 Route::post('/createquestion',          [\App\Http\Controllers\QuizController::class, 'createQuestion']);
-
+Route::post('/validateanswear',         [\App\Http\Controllers\QuizController::class, 'validateAnswear']);
+Route::get('/getquestion/{kode}',       [\App\Http\Controllers\QuizController::class, 'getQuestions']);
+Route::get('/getranks/{kode}',           [\App\Http\Controllers\QuizController::class, 'getRankbyKode']);
 
 Route::get('/spklu/nearby',             [\App\Http\Controllers\SPKLUController::class, 'getSPKLUNearby']);
 Route::get('/spklu/query/{query}',      [\App\Http\Controllers\SPKLUController::class, 'getSPKLUbyQuery']);
