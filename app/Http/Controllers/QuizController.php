@@ -79,7 +79,7 @@ class QuizController extends Controller
         }
     }
 
-    public function getQuestion(string $kode)
+    public function getQuestions(string $kode)
     {
         $soal = SoalQuiz::where('kode', '=', $kode)
             ->select([
@@ -138,12 +138,26 @@ class QuizController extends Controller
             $player->save();
         }
 
-        event(new QuizRankEvent('listen', $player));
-
         return [
             "id_soal" => $data['id_soal'],
             "kode_soal" => $data['kode_soal'],
             "jawaban" => true
         ];
+    }
+
+    public function getRankbyKode(string $kode) {
+
+        $playersPoint = PointQuiz::where('kode_soal', '=', $kode)
+            ->select([
+                "id",
+                "nama",
+                "jumlah"
+            ])
+            ->get();
+        return [
+            "kode" => $kode,
+            "data" => $playersPoint,
+        ];
+
     }
 }
