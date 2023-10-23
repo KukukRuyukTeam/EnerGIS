@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\QuizRankEvent;
 use App\Models\PointQuiz;
 use App\Models\SoalQuiz;
 use Illuminate\Http\Request;
@@ -78,6 +79,21 @@ class QuizController extends Controller
         }
     }
 
+    public function getQuestion(string $kode)
+    {
+        $soal = SoalQuiz::where('kode', '=', $kode)
+            ->select([
+                "id",
+                "pertanyaan",
+                "pilihan"
+            ])
+            ->get();
+        return [
+            "kode" => $kode,
+            "data" => $soal
+        ];
+    }
+
     public function validateAnswear(Request $request)
     {
 
@@ -121,6 +137,8 @@ class QuizController extends Controller
             $player->jumlah += 10;
             $player->save();
         }
+
+        event(new QuizRankEvent('listen', $player));
 
         return [
             "id_soal" => $data['id_soal'],
