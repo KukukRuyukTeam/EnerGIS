@@ -36,4 +36,11 @@ class QuizTest extends TestCase
             "jawaban" => "Ya"
         ])->dump();
     }
+
+    public function testGetQuestion()
+    {
+        $this->seed([SoalQuizSeeder::class]);
+        $this->get('/api/getquestion/' . 'sukri')
+            ->dump();
+    }
 }
