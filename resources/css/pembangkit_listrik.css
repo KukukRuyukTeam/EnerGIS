@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800;900&family=Poppins:wght@500;800&display=swap');
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-image: url(image/map.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Lexend;
+}
+.navbar{
+    width: 100%;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    background: none;
+    justify-content: center;
+}
+.btn-plt{
+    font-weight: 600;
+    width: 10%;
+    padding-left: 2%;
+    height: 4vh;
+    font-size: 10px;
+    color: white;
+    background-color: #5198F8;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border: none;
+    background-image: url(image/icon_plt.png);
+    background-repeat: no-repeat;
+    background-size: 10%;
+    letter-spacing: 0.7px;
+    background-position: 15%;
+}
+.btn-spklu{
+    font-weight: 600;
+    width: 10%;
+    height: 4vh;
+    padding-left: 1%;
+    font-size: 10px;
+    color: black;
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: none;
+    background-image: url(image/icon_spklu_black.png);
+    background-repeat: no-repeat;
+    background-size: 10%;
+    background-position: 30%;
+    letter-spacing: 0.7px;
+}
+.list-view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 10vh;
+    left: 1vw;
+    width: 17%;
+    height: 80vh;
+    border-radius: 10px;
+    background-color: white;
+}
+.search{
+    margin-top: 5%;
+    background-image: url(image/search_icon_blue.png);
+    background-repeat: no-repeat;
+    background-size: 8%;
+    background-position: 4%; 
+    border: 1px solid #5198F8;
+    border-radius:8px;
+    height: 4vh;
+    width: 92%;
+    color: #808080;
+}
+.search::placeholder{
+    position: absolute;
+    left: 13%;
+    opacity: 0.5;
+}
+.search:focus { 
+    background-image: none; 
+    outline: none;
+    padding-left: 5%;
+}
+.search:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+.search::-ms-fill{
+    background-image: none; 
+}
+.list-kategori{
+    display: flex;
+    flex-direction: row;
+    width: 150%;
+    margin-top: 5%;
+    white-space: nowrap;
+}
+.btn-kategori{
+    font-family: poppins;
+    font-size: 10px;
+    font-weight: 600;
+    height: 2.5vh;
+    border-radius: 30px;
+    width: 40%;
+    border: 0.5px solid #5198F8;
+    color: #BFBFBF;
+    background: #FFF;
+    margin-right: 1%;
+}
+.btn-kategori.active{
+    font-family: poppins;
+    font-size: 10px;
+    font-weight: 600;
+    height: 2.5vh;
+    border-radius: 30px;
+    width: 40%;
+    border: 0.5px solid #5198F8;
+    color: white;
+    background: #5198F8;
+    margin-right: 1%;
+}
+.container-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+.list-item{
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+}
+.keterangan{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+.nama{
+    font-size: 14px;
+    font-weight: 600;
+}
+.alamat{
+    font-size: 8px;
+    color:  #9E9E9E;
+    margin-top: -1%;
+    margin-bottom: 1%;
+}
+.kategori{
+    font-family: poppins;
+    font-size: 7px;
+    font-weight: 600;
+    height: 1.5vh;
+    border-radius: 30px;
+    width: 30%;
+    border: none;
+    color: #4D4D4D;
+    background: #B9D7FF;
+    margin-right: 1%;
+}
+.container-detail{
+    width: 18%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.close-btn{
+    width: 4%;
+    height: 2%;
+    margin-top: 4%;
+    margin-left: 90%;
+}
+.nama-detail{
+    font-size: 22px;
+    font-weight: 600;
+}
+.alamat-detail{
+    font-size: 9px;
+    color:  #9E9E9E;
+    margin-top: 0%;
+    word-spacing: 10px;
+    line-height: 1.5;
+}
+.deskripsi{
+    font-size: 9px;
+    color: #4D4D4D;
+    font-weight: 500;
+}
+.atribut{
+    width: 90%;
+    padding: 5%;
+    border: 1px solid #B9D7FF;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.text-atribut{
+    font-size: 9px;
+    color: #4D4D4D;
+    font-weight: 500;
+    margin-top: 2%;
+}
