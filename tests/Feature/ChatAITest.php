@@ -18,12 +18,12 @@ class ChatAITest extends TestCase
             'messages' => [
                 [
                     "role" => "user",
-                    "content" => 'Siapa kamu?'
+                    "content" => 'Apa itu Energi Terbarukan?'
                 ]
             ]
         ])->assertJsonStructure([
             "data"
-        ]);
+        ])->dump();
     }
 
     public function testFailedCreateChat(): void
@@ -47,18 +47,4 @@ class ChatAITest extends TestCase
         ]);
     }
 
-    public function testSuccessCreateQuestion()
-    {
-        $this->post('/api/createquestion', [
-            'code' => 'sukri',
-            'level' => 'advance'
-        ])->dump();
-    }
-
-    public function testFailedCreateQuestion()
-    {
-        $this->post('/api/createquestion', [
-            'level' => 'advance'
-        ])->dump();
-    }
 }
