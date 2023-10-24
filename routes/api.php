@@ -23,41 +23,41 @@ Route::post('/admin',                   [\App\Http\Controllers\AdminController::
 
 
 // [[ Hanya untuk fungsi admin yang menggunakan TOKEN ]] //
-Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
+//Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
     Route::get('/admin/current',        [\App\Http\Controllers\AdminController::class, 'get']);
     Route::post('/admin/logout',        [\App\Http\Controllers\AdminController::class, 'logoutAdmin']);
 
     Route::prefix('pembangkit')->group(function () {
         Route::post('/plta',                [\App\Http\Controllers\PLTAController::class, 'insertPLTA']);
-        Route::put('/plta/{id}',            [\App\Http\Controllers\PLTAController::class, 'updatePLTA']);
-        Route::delete('/plta/{id}',         [\App\Http\Controllers\PLTAController::class, 'deletePLTA']);
+        Route::post('/plta/update/{id}',            [\App\Http\Controllers\PLTAController::class, 'updatePLTA']);
+        Route::post('/plta/delete/{id}',         [\App\Http\Controllers\PLTAController::class, 'deletePLTA']);
 
         Route::post('/plts',                [\App\Http\Controllers\PLTSController::class, 'insertPLTS']);
-        Route::put('/plts/{id}',            [\App\Http\Controllers\PLTSController::class, 'updatePLTS']);
-        Route::delete('/plts/{id}',         [\App\Http\Controllers\PLTSController::class, 'deletePLTS']);
+        Route::post('/plts/update/{id}',            [\App\Http\Controllers\PLTSController::class, 'updatePLTS']);
+        Route::post('/plts/delete/{id}',         [\App\Http\Controllers\PLTSController::class, 'deletePLTS']);
 
         Route::post('/pltbm',                [\App\Http\Controllers\PLTBmController::class, 'insertPLTBm']);
-        Route::put('/pltbm/{id}',            [\App\Http\Controllers\PLTBmController::class, 'updatePLTBm']);
-        Route::delete('/pltbm/{id}',         [\App\Http\Controllers\PLTBmController::class, 'deletePLTBm']);
+        Route::put('/pltbm/update/{id}',            [\App\Http\Controllers\PLTBmController::class, 'updatePLTBm']);
+        Route::post('/pltbm/delete/{id}',         [\App\Http\Controllers\PLTBmController::class, 'deletePLTBm']);
 
         Route::post('/pltm',                [\App\Http\Controllers\PLTMController::class, 'insertPLTM']);
-        Route::put('/pltm/{id}',            [\App\Http\Controllers\PLTMController::class, 'updatePLTM']);
-        Route::delete('/pltm/{id}',         [\App\Http\Controllers\PLTMController::class, 'deletePLTM']);
+        Route::put('/pltm/update/{id}',            [\App\Http\Controllers\PLTMController::class, 'updatePLTM']);
+        Route::post('/pltm/delete/{id}',         [\App\Http\Controllers\PLTMController::class, 'deletePLTM']);
 
         Route::post('/pltmh',                [\App\Http\Controllers\PLTMHController::class, 'insertPLTMH']);
-        Route::put('/pltmh/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
-        Route::delete('/pltmh/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
+        Route::put('/pltmh/update/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
+        Route::post('/pltmh/delete/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
 
         Route::post('/pltp',                [\App\Http\Controllers\PLTPController::class, 'insertPLTP']);
-        Route::put('/pltp/{id}',            [\App\Http\Controllers\PLTPController::class, 'updatePLTP']);
-        Route::delete('/pltp/{id}',         [\App\Http\Controllers\PLTPController::class, 'deletePLTP']);
+        Route::put('/pltp/update/{id}',            [\App\Http\Controllers\PLTPController::class, 'updatePLTP']);
+        Route::post('/pltp/delete/{id}',         [\App\Http\Controllers\PLTPController::class, 'deletePLTP']);
 
         Route::post('/pltb',                [\App\Http\Controllers\PLTBController::class, 'insertPLTB']);
-        Route::put('/pltb/{id}',            [\App\Http\Controllers\PLTBController::class, 'updatePLTB']);
-        Route::delete('/pltb/{id}',         [\App\Http\Controllers\PLTBController::class, 'deletePLTB']);
+        Route::put('/pltb/update/{id}',            [\App\Http\Controllers\PLTBController::class, 'updatePLTB']);
+        Route::post('/pltb/delete/{id}',         [\App\Http\Controllers\PLTBController::class, 'deletePLTB']);
     });
 
-});
+//});
 
 // [[ Public function ]] //
 Route::prefix('pembangkit')->group(function () {

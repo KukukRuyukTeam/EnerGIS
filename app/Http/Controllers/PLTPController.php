@@ -6,6 +6,7 @@ use App\Http\Requests\PLTPRequest;
 use App\Models\Pembangkit;
 use App\Models\PLTP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PLTPController extends Controller
 {
@@ -13,7 +14,13 @@ class PLTPController extends Controller
     {
         $data = $request->validated();
 
-        $newPembangkit = new Pembangkit($data);
+        $newPembangkit      = new Pembangkit($data);
+        if ($request->file('gambar'))
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $newPembangkit->gambar = $imageName;
+        }
         $statusPembangkit = $newPembangkit->save();
         $statusPLTP = $newPembangkit->pltp()->save(new PLTP($data));
 
@@ -73,6 +80,16 @@ class PLTPController extends Controller
         $data = $request->validated();
 
         $pembangkit = Pembangkit::where('id', '=', $id)->first();
+        if ($request->file('gambar') &&
+            $request->file('gambar')->getClientOriginalName() != $pembangkit->gambar)
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        } else {
+            unset($data['gambar']);
+        }
+
         $statusPembangkit = $pembangkit->update($data);
         $statusPLTP = $pembangkit->pltp->update($data);
 

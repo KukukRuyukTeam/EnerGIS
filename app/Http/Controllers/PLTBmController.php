@@ -7,6 +7,7 @@ use App\Http\Resources\PLTBmResource;
 use App\Models\Pembangkit;
 use App\Models\PLTBm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PLTBmController extends Controller
 {
@@ -14,7 +15,13 @@ class PLTBmController extends Controller
     {
         $data = $request->validated();
 
-        $newPembangkit = new Pembangkit($data);
+        $newPembangkit      = new Pembangkit($data);
+        if ($request->file('gambar'))
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $newPembangkit->gambar = $imageName;
+        }
         $statusPembangkit = $newPembangkit->save();
         $statusPLTBm = $newPembangkit->pltbm()->save(new PLTBm($data));
 
@@ -75,8 +82,18 @@ class PLTBmController extends Controller
         $data = $request->validated();
 
         $pembangkit = Pembangkit::where('id', '=', $id)->first();
-        $statusPLTBm = $pembangkit->update($data);
-        $statusPembangkit = $pembangkit->pltbm->update($data);
+        if ($request->file('gambar') &&
+            $request->file('gambar')->getClientOriginalName() != $pembangkit->gambar)
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        } else {
+            unset($data['gambar']);
+        }
+
+        $statusPembangkit = $pembangkit->update($data);
+        $statusPLTBm = $pembangkit->pltbm->update($data);
 
         return ["status" => ($statusPembangkit && $statusPLTBm)];
     }
