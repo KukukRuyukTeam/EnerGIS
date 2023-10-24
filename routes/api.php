@@ -23,7 +23,7 @@ Route::post('/admin',                   [\App\Http\Controllers\AdminController::
 
 
 // [[ Hanya untuk fungsi admin yang menggunakan TOKEN ]] //
-Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
+//Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
     Route::get('/admin/current',        [\App\Http\Controllers\AdminController::class, 'get']);
     Route::post('/admin/logout',        [\App\Http\Controllers\AdminController::class, 'logoutAdmin']);
 
@@ -57,7 +57,7 @@ Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(functi
         Route::post('/pltb/delete/{id}',         [\App\Http\Controllers\PLTBController::class, 'deletePLTB']);
     });
 
-});
+//});
 
 // [[ Public function ]] //
 Route::prefix('pembangkit')->group(function () {
