@@ -30,7 +30,7 @@ class PembangkitRequest extends FormRequest
             'deskripsi' => ['nullable'],
             'lokasi' => ['nullable'],
             'kapasitas' => ['nullable', 'numeric'],
-            'gambar' => ['nullable'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 

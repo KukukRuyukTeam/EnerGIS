@@ -6,6 +6,7 @@ use App\Http\Requests\PLTMRequest;
 use App\Models\Pembangkit;
 use App\Models\PLTM;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PLTMController extends Controller
 {
@@ -13,7 +14,13 @@ class PLTMController extends Controller
     {
         $data = $request->validated();
 
-        $newPembangkit = new Pembangkit($data);
+        $newPembangkit      = new Pembangkit($data);
+        if ($request->file('gambar'))
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $newPembangkit->gambar = $imageName;
+        }
         $statusPembangkit = $newPembangkit->save();
         $statusPLTM = $newPembangkit->pltm()->save(new PLTM($data));
 
@@ -73,10 +80,21 @@ class PLTMController extends Controller
     {
         $data = $request->validated();
 
-        $pltm = Pembangkit::where('id', '=', $id)->first();
-        $statusPembangkit = $pltm->pltm->update($data);
+        $pembangkit = Pembangkit::where('id', '=', $id)->first();
+        if ($request->file('gambar') &&
+            $request->file('gambar')->getClientOriginalName() != $pembangkit->gambar)
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        } else {
+            unset($data['gambar']);
+        }
 
-        return ["status" => $statusPembangkit];
+        $statusPembangkit = $pembangkit->update($data);
+        $statusPLTM = $pembangkit->pltm->update($data);
+
+        return ["status" => $statusPembangkit && $statusPLTM];
     }
 
     public function deletePLTM(string $id)

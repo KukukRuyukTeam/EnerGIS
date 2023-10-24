@@ -7,6 +7,7 @@ use App\Http\Resources\PLTSResource;
 use App\Models\Pembangkit;
 use App\Models\PLTS;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PLTSController extends Controller
 {
@@ -15,6 +16,12 @@ class PLTSController extends Controller
         $data = $request->validated();
 
         $newPembangkit      = new Pembangkit($data);
+        if ($request->file('gambar'))
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $newPembangkit->gambar = $imageName;
+        }
         $statusPembangkit   = $newPembangkit->save();
         $statusPLTS         = $newPembangkit->plts()->save(new PLTS($data));
 
@@ -75,6 +82,16 @@ class PLTSController extends Controller
         $data = $request->validated();
 
         $pembangkit         = Pembangkit::where('id', $id)->first();
+        if ($request->file('gambar') &&
+            $request->file('gambar')->getClientOriginalName() != $pembangkit->gambar)
+        {
+            $imageName = Str::uuid() . '.' . $data['gambar']->extension();
+            $data['gambar']->move(public_path('images'), $imageName);
+            $data['gambar'] = $imageName;
+        } else {
+            unset($data['gambar']);
+        }
+
         $statusPembangkit   = $pembangkit->update($data);
         $statusPLTS         = $pembangkit->plts->update($data);
 
