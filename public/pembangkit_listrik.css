@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800;900&family=Poppins:wght@500;800&display=swap');
+
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Lexend;
+}
+
+html, body, #map {
+  height: 100%;
+}
+
+.lorem {
+  font-style: italic;
+  color: #AAA;
+}
+.leaflet-sidebar {
+position: absolute;
+height: 100%;
+display: none;
+ }
+.leaflet-sidebar.right {
+right: 0;
+padding-left: 0; 
+}
+.leaflet-sidebar.right.visible {
+right: 0; 
+display: block;
+}
+.leaflet-sidebar > .leaflet-control {
+height: 100%;
+width: 85%;
+overflow: auto;
+-webkit-overflow-scrolling: touch;
+padding: 8px 24px;
+font-size: 1.1em;
+background: white;
+
+}
+.leaflet-touch .leaflet-sidebar > .leaflet-control {
+box-shadow: none;
+background-clip: padding-box; 
+}
+@media (max-width: 767px) {
+.leaflet-sidebar {
+width: 100%;
+padding: 0;
+ }
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+right: 100%; 
+}
+.leaflet-sidebar.right {
+right: -100%; 
+}
+.leaflet-sidebar.right.visible {
+  right: 0; 
+}
+.leaflet-sidebar > .leaflet-control {
+box-shadow: none;
+-webkit-border-radius: 0;
+border-radius: 0;
+ }
+.leaflet-touch .leaflet-sidebar > .leaflet-control {
+  border: 0; 
+} 
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.leaflet-sidebar {
+width: 305px; 
+}
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+right: 305px; 
+} 
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+.leaflet-sidebar {
+width: 20%; 
+}
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+right: 390px; 
+}
+ }
+@media (min-width: 1200px) {
+.leaflet-sidebar {
+width: 20%; 
+}
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+right: 0; 
+} 
+}
+.leaflet-sidebar .close {
+position: absolute;
+right: 20px;
+top: 20px;
+width: 0;
+height: 31px;
+color: #333;
+font-size: 25px;
+line-height: 1em;
+text-align: center;
+background: white;
+cursor: pointer;
+z-index: 1000; }
+
+.keterangan{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+}
+.nama{
+  font-size: 14px;
+  font-weight: 600;
+}
+.alamat{
+  font-size: 8px;
+  color:  #9E9E9E;
+  margin-top: -1%;
+  margin-bottom: 1%;
+}
+.kategori{
+  font-family: poppins;
+  font-size: 7px;
+  font-weight: 600;
+  height: 1.5vh;
+  border-radius: 30px;
+  width: 30%;
+  border: none;
+  color: #4D4D4D;
+  background: #B9D7FF;
+  margin-right: 1%;
+}
+.container-detail{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.close-btn{
+  width: 4%;
+  height: 2%;
+  margin-top: 4%;
+  margin-left: 90%;
+}
+.nama-detail{
+  font-size: 22px;
+  font-weight: 600;
+}
+.alamat-detail{
+  font-size: 9px;
+  color:  #9E9E9E;
+  margin-top: 0%;
+  word-spacing: 10px;
+  line-height: 1.5;
+}
+.deskripsi{
+  font-size: 9px;
+  color: #4D4D4D;
+  font-weight: 500;
+}
+.atribut{
+  width: 90%;
+  padding: 5%;
+  border: 1px solid #B9D7FF;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+}
+.text-atribut{
+  font-size: 9px;
+  color: #4D4D4D;
+  font-weight: 500;
+  margin-top: 2%;
+}
+.list-view{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 10vh;
+  left: 1vw;
+  width: 17%;
+  height: 23vh;
+  border-radius: 10px;
+  background-color: white;
+}
+.search{
+  margin-top: 5%;
+  background-image: url(image/search_icon_blue.png);
+  background-repeat: no-repeat;
+  background-size: 8%;
+  background-position: 4%; 
+  border: 1px solid #5198F8;
+  border-radius:8px;
+  height: 4vh;
+  width: 92%;
+  color: #808080;
+}
+.search::placeholder{
+  position: absolute;
+  left: 13%;
+  opacity: 0.5;
+}
+.search:focus { 
+  background-image: none; 
+  outline: none;
+  padding-left: 5%;
+}
+.search:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+.search::-ms-fill{
+  background-image: none; 
+}
+.list-kategori{
+  display: flex;
+  flex-direction: row;
+  margin-top: 5%;
+  white-space: nowrap;
+}
+.btn-kategori{
+  font-family: poppins;
+  font-size: 10px;
+  font-weight: 600;
+  height: 2.5vh;
+  border-radius: 30px;
+  width: 40%;
+  border: 0.5px solid #5198F8;
+  color: #BFBFBF;
+  background: #FFF;
+  margin-right: 1%;
+}
+.btn-kategori.active{
+  font-family: poppins;
+  font-size: 10px;
+  font-weight: 600;
+  height: 2.5vh;
+  border-radius: 30px;
+  width: 40%;
+  border: 0.5px solid #5198F8;
+  color: white;
+  background: #5198F8;
+  margin-right: 1%;
+}
+.container-list{
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  margin-top: 5%;
+}
+.list-item{
+  border-top: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+}
