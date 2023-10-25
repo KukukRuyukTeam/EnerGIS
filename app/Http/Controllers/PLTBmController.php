@@ -40,13 +40,21 @@ class PLTBmController extends Controller
         return ["data" => $pembangkit];
     }
 
-    public function getPLTBmbyPage()
+    public function getPLTBms()
     {
         $perPage = 10;
-        $pltbm = Pembangkit::with('pltbm')
-            ->paginate($perPage);
+        $pembangkit = Pembangkit::join('pltbm', 'pltbm.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTBm();
+            });
 
-        return $pltbm;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function  getPLTBmNearby(Request $request)

@@ -38,13 +38,21 @@ class PLTPController extends Controller
         return $pembangkit;
     }
 
-    public function getPLTPbyPage()
+    public function getPLTPs()
     {
         $perPage = 10;
-        $pembangkit = Pembangkit::with('pltp')
-            ->paginate($perPage);
+        $pembangkit = Pembangkit::join('pltp', 'pltp.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTP();
+            });
 
-        return $pembangkit;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function getPLTPbyQuery(string $query)

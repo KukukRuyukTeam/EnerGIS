@@ -40,13 +40,21 @@ class PLTSController extends Controller
         return ["data" => $pembangkit];
     }
 
-    public function getPLTSbyPage()
+    public function getPLTSs()
     {
         $perPage = 10;
-        $pembangkit = Pembangkit::with('plts')
-            ->paginate($perPage);
+        $pembangkit = Pembangkit::join('plts', 'plts.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTS();
+            });
 
-        return $pembangkit;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function  getPLTSNearby(Request $request)
