@@ -51,7 +51,7 @@ class PLTMController extends Controller
         return [
             "data" => [
                 "type" => "FeatureCollection",
-                "features" => [$pembangkit]
+                "features" => $pembangkit
             ],
         ];
     }
