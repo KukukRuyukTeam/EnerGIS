@@ -39,13 +39,21 @@ class PLTMHController extends Controller
         return ["data" => $pembangkit];
     }
 
-    public function getPLTMHbyPage()
+    public function getPLTMHs()
     {
         $perPage = 10;
-        $pembangkit = Pembangkit::with('pltmh')
-            ->paginate($perPage);
+        $pembangkit = Pembangkit::join('pltmh', 'pltmh.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTMH();
+            });
 
-        return $pembangkit;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function getPLTMHNearby(Request $request)

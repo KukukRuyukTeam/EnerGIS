@@ -40,13 +40,22 @@ class PLTAController extends Controller
         return ["data" => $pembangkit];
     }
 
-    public function getPLTAbyPage(Request $request) {
+    public function getPLTAs(Request $request) {
 
         $perPage = 10;
-        $pembangkit = Pembangkit::with('plta')
-            ->paginate($perPage);
+        $currentPage = $request->input('page', 1);
+        $pembangkit = Pembangkit::join('plta', 'plta.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTA();
+            });//->forPage($currentPage, $perPage);
 
-        return $pembangkit;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function getPLTANearby(Request $request)

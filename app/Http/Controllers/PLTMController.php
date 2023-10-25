@@ -39,13 +39,21 @@ class PLTMController extends Controller
         return ["data" => $pembangkit];
     }
 
-    public function getPLTMbyPage()
+    public function getPLTMs()
     {
         $perPage = 10;
-        $pembangkit = Pembangkit::with('pltm')
-            ->paginate($perPage);
+        $pembangkit = Pembangkit::join('pltm', 'pltm.id_pl', '=', 'pembangkit.id')
+            ->get()
+            ->map(function ($pembangkit) {
+                return $pembangkit->formatPLTM();
+            });
 
-        return $pembangkit;
+        return [
+            "data" => [
+                "type" => "FeatureCollection",
+                "features" => [$pembangkit]
+            ],
+        ];
     }
 
     public function getPLTMNearby(Request $request)

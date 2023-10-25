@@ -17,8 +17,8 @@ class PLTA extends Model
 
     protected $fillable = [
         'id_pl',
-        'tipe_pembangkit',
-        'unit_pembangkit'
+        'jenis_generator',
+        'unit_generator'
     ];
 
     public function pembangkit() {

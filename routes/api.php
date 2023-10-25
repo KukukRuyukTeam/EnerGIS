@@ -63,49 +63,49 @@ Route::post('/admin',                   [\App\Http\Controllers\AdminController::
 Route::prefix('pembangkit')->group(function () {
 
     Route::prefix('plta')->group(function () {
-        Route::get('/',                [\App\Http\Controllers\PLTAController::class, 'getPLTAbyPage']);
+        Route::get('/',                [\App\Http\Controllers\PLTAController::class, 'getPLTAs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTAController::class, 'getPLTAbyQuery']);
         Route::get("/nearby",          [\App\Http\Controllers\PLTAController::class, 'getPLTANearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTAController::class, 'getPLTAbyID']);
     });
 
     Route::prefix('plts')->group(function () {
-        Route::get('/',               [\App\Http\Controllers\PLTSController::class, 'getPLTSbyPage']);
+        Route::get('/',               [\App\Http\Controllers\PLTSController::class, 'getPLTSs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTSController::class, 'getPLTSbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTSController::class, 'getPLTSNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTSController::class, 'getPLTSbyID']);
     });
 
     Route::prefix('pltbm')->group(function () {
-        Route::get('/',               [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyPage']);
+        Route::get('/',               [\App\Http\Controllers\PLTBmController::class, 'getPLTBms']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTBmController::class, 'getPLTBmNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTBmController::class, 'getPLTBmbyID']);
     });
 
     Route::prefix('pltm')->group(function () {
-        Route::get('/',               [\App\Http\Controllers\PLTMController::class, 'getPLTMbyPage']);
+        Route::get('/',               [\App\Http\Controllers\PLTMController::class, 'getPLTMs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTMController::class, 'getPLTMbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTMController::class, 'getPLTMNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTMController::class, 'getPLTMbyID']);
     });
 
     Route::prefix('pltmh')->group(function () {
-        Route::get('/',               [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyPage']);
+        Route::get('/',               [\App\Http\Controllers\PLTMHController::class, 'getPLTMHs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTMHController::class, 'getPLTMbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTMHController::class, 'getPLTMHNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTMHController::class, 'getPLTMHbyID']);
     });
 
     Route::prefix('pltp')->group(function () {
-        Route::get('/',                [\App\Http\Controllers\PLTPController::class, 'getPLTPbyPage']);
+        Route::get('/',                [\App\Http\Controllers\PLTPController::class, 'getPLTPs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTPController::class, 'getPLTPbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTPController::class, 'getPLTPNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTPController::class, 'getPLTPbyID']);
     });
 
     Route::prefix('pltb')->group(function () {
-        Route::get('/',               [\App\Http\Controllers\PLTBController::class, 'getPLTBbyPage']);
+        Route::get('/',               [\App\Http\Controllers\PLTBController::class, 'getPLTBs']);
         Route::get('/query/{query}',   [\App\Http\Controllers\PLTBController::class, 'getPLTBbyQuery']);
         Route::get('/nearby',          [\App\Http\Controllers\PLTBController::class, 'getPLTBNearby']);
         Route::get('/{id}',            [\App\Http\Controllers\PLTBController::class, 'getPLTBbyID']);

@@ -18,8 +18,8 @@ class PLTATest extends TestCase
         $this->seed([AdminSeeder::class]);
         $response = $this->post('/api/pembangkit/plta', [
             'nama' => 'PLTA Bogor',
-            'tipe_pembangkit' => 'Generator',
-            'unit_pembangkit' => 'Generator 1',
+            'jenis_generator' => 'Generator',
+            'unit_generator' => 'Generator 1',
             'longitude' => -6.589169556757834 + ("-0.00000000" . random_int(1, 50)),
             'latitude' => 106.8061123132633 + ("0.00" . random_int(50, 200)),
             'deskripsi' => "Adalah PLTA",

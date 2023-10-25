@@ -17,8 +17,8 @@ return new class extends Migration
             $table->uuid('id_pl')->nullable()->unsigned()->index();
             $table->foreign('id_pl')->references('id')->on('pembangkit')->onDelete('cascade');
 
-            $table->string('tipe_pembangkit')->nullable();
-            $table->string('unit_pembangkit')->nullable();
+            $table->string('jenis_generator')->nullable();
+            $table->string('unit_generator')->nullable();
             $table->timestamps();
         });
 
