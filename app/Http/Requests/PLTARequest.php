@@ -22,8 +22,8 @@ class PLTARequest extends PembangkitRequest
     public function rules(): array
     {
         return array_merge(parent::rules(), [
-            'tipe_pembangkit' => ['string', 'nullable'],
-            'unit_pembangkit' => ['string', 'nullable'],
+            'jenis_generator' => ['string', 'nullable'],
+            'unit_generator' => ['string', 'nullable'],
         ]);
     }
 

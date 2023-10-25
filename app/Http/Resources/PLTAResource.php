@@ -17,8 +17,8 @@ class PLTAResource extends JsonResource
         return [
             'id' => $this->id,
             'id_pl' => $this->id_pl,
-            'tipe_pembangkit' => $this->tipe_pembangkit,
-            'unit_pembangkit' => $this->unit_pembangkit,
+            'jenis_generator' => $this->jenis_generator,
+            'unit_generator' => $this->unit_generator,
             'pembangkit' => $this->pembangkit,
         ];
     }
