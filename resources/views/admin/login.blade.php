@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/login_admin.css">
+    <link rel="stylesheet" href="{{ asset('/admin_login.css') }}">
     <title>Slide Down Animation</title>
    
 </head>
@@ -14,9 +14,10 @@
             <div style="display: flex;flex-direction: column;justify-content: start;align-items: start;margin-top: 10%;width: 40%;margin-left: 25%;">
                 <span style="font-weight: 600;font-size: 28px;margin-bottom: 5%;">Welcome to <span style="color: #B9D7FF;">Ener</span><span style="color: #5198F8;">GIS</span>!</span>
                 <span style="font-weight: 900;font-size: 48px;margin-bottom: 2%;color: #021C3F;">Login</span>
-                <form>
-                    <input type="text" placeholder="Username" class="input">
-                    <input type="password" placeholder="Password" class="input">
+                <form method="post" action="{{route('login.perform')}}" >
+                    @csrf
+                    <input type="text" placeholder="Email" id="email" name="email" class="input">
+                    <input type="password" placeholder="Password" id="password" name="password" class="input">
                     <input type="submit" value="Login" class="button">
                 </form>
             </div>
@@ -26,5 +27,4 @@
         </div>
     </div>
 </body>
-
 </html>

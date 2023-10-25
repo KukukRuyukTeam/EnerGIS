@@ -6,15 +6,16 @@
 
     <link rel="stylesheet" href="{{ asset('/leaflet.css') }}" />
     <link rel="stylesheet" href="{{ asset('/pembangkit_listrik.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- [if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif] -->
 
-    
+
 </head>
 <body>
-    
+
     <div id="sidebar">
         <div class="container-detail" id="sidebar-content">
-            
+
         </div>
     </div>
 
@@ -25,7 +26,7 @@
         <div style="overflow-x: hidden;width: 92%;">
             <div class="list-kategori">
                 <button class="btn-kategori active">PLTA</button>
-                <button class="btn-kategori">PLTS</button>
+                <button class="btn-kategori" id="plts" onclick="">PLTS</button>
                 <button class="btn-kategori">PLTP</button>
                 <button class="btn-kategori">PLTB</button>
                 <button class="btn-kategori">PLTMH</button>
@@ -74,29 +75,55 @@
 
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: 'Map data &copy; OpenStreetMap contributors' 
+            attribution: 'Map data &copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        async function getContent() {
-            return json_RumahSakitKlinik_2.features[0].properties
+        async function getContent(kategori) {
+            const response = await axios.get(`{{url("api/pembangkit/plta")}}`)
+            return response.data
+        }
+        const setPembangkit = async () =>{
+            var pembangkit = new L.geoJson.multiStyle(await getContent(), {
+                attribution: '',
+                interactive: true,
+                // dataVar: 'PembangkitListrik',
+                // layerName: 'layer_RumahSakitKlinik_2',
+                // pane: 'pane_RumahSakitKlinik_2',
+                onEachFeature: set_sidebar_content,
+                pointToLayers: [function (feature, latlng) {
+                    var context = {
+                        feature: feature,
+                        variables: {}
+                    };
+                    return L.shapeMarker(latlng, style_RumahSakitKlinik_2_0(feature));
+                },function (feature, latlng) {
+                    var context = {
+                        feature: feature,
+                        variables: {}
+                    };
+                    return L.shapeMarker(latlng, style_RumahSakitKlinik_2_1(feature));
+                },
+                ]
+            });
         }
 
-        var marker = L.marker([-6.600312,106.794886]).addTo(map).on('click', function () {
-            getContent().then(res=>{
-                set_sidebar_content(res);
-                sidebar.toggle();
-            }).catch(err=>{
-                console.error(err)
-            })
-            
-            
-        });
+
+        // var marker = L.marker([-6.600312,106.794886]).addTo(map).on('click', function () {
+        //     getContent().then(res=>{
+        //         console.log(res)
+        //         return
+        //         set_sidebar_content(res);
+        //         sidebar.toggle();
+        //     }).catch(err=>{
+        //         console.error(err)
+        //     })
+        // });
 
         var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
         });
-        map.addControl(sidebar); 
+        map.addControl(sidebar);
 
         map.on('click', function () {
             sidebar.hide();
@@ -126,7 +153,7 @@
             <div style="width: 90%;margin-left: 5%;display: flex;flex-direction: column;margin-top: 12%;">
                 <div style="margin-top: 2%;">
                     <img width="6%" src="image/logo_plta.png">
-                    <span class="nama-detail">${content.NIM}</span>
+                    <span class="nama-detail">${content.nama}</span>
                 </div>
                 <span class="alamat-detail">Aranio, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan 70671</span>
                 <span style="margin-top: 4%;font-weight: 500;font-size: 14px;color: #4D4D4D;">Deskripsi</span>

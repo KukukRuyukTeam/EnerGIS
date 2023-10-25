@@ -29,6 +29,18 @@ Route::get('/energame', function () {
     return view('energame');
 });
 
+Route::get('/admin', function () {
+    return view('admin/login');
+});
+
+Route::get('/admin_pembangkit', function () {
+    return view('admin/admin_pembangkit_listrik');
+});
+
+Route::post('/admin/login',[\App\Http\Controllers\AdminController::class, 'loginAdmin'])->name('login.perform');
+
 Route::prefix('pembangkit')->group(function () {
 });
+
+
 
