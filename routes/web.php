@@ -17,6 +17,18 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/peta', function () {
+    return view('peta');
+});
+
+Route::get('/tentang', function () {
+    return view('about');
+});
+
+Route::get('/energame', function () {
+    return view('energame');
+});
+
 Route::prefix('pembangkit')->group(function () {
 });
 

@@ -13,9 +13,10 @@
             <nav>
                 <ul>
                     <a style="position: absolute;left: 5%;top: 3%;background-image: url('image/logo_biru.png'); background-size: cover;width: 92px;height: 40px;"></a>
-                    <li><a>Pembangkit Listrik</a></li>
-                    <li><a>SPKLU</a></li>
-                    <li><a>Tentang</a></li>
+                    <li><a href="{{url('pembangkit')}}">Pembangkit Listrik</a></li>
+                    <li><a href="{{url('energame')}}">EnerGame</a></li>
+                    <li><a href="{{url('peta')}}">Peta</a></li>
+                    <li><a href="{{url('tentang')}}">Tentang</a></li>
                 </ul>
             </nav>
         </header>
