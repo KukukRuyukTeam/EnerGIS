@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
-    <title>Slide Down Animation</title>
-   
+    <link rel="stylesheet" href="{{ asset('/home.css') }}">
+    <title>Tentang</title>
+
 </head>
 <body>
     <div style="background-image: url('image/banner.png');background-size: 100% 70%;background-repeat: no-repeat;">
         <header>
             <nav>
                 <ul>
-                    <a style="position: absolute;left: 5%;top: 3%;background-image: url('image/logo_biru.png'); background-size: cover;width: 92px;height: 40px;"></a>
-                    <li><a>Pembangkit Listrik</a></li>
-                    <li><a>SPKLU</a></li>
-                    <li><a>Tentang</a></li>
+                    <a style="position: absolute;left: 5%;top: 3%;background-image: url('image/logo_biru.png'); background-size: cover;width: 92px;height: 40px;" href="{{url('')}}"></a>
+                    <li><a href="{{url('pembangkit')}}">Pembangkit Listrik</a></li>
+                    <li><a href="{{url('energame')}}">EnerGame</a></li>
+                    <li><a href="{{url('peta')}}">Peta</a></li>
+                    <li><a href="{{url('tentang')}}">Tentang</a></li>
                 </ul>
             </nav>
         </header>
@@ -48,7 +49,7 @@
             <span style="font-size: 18px;width: 90%;color: #706D6D;line-height: 30px;">Akhir-akhir ini, masalah terkait polusi di Indonesia sedang ramai diperbincangkan. Terhambatnya aktivitas dan resiko kesehatan yang tidak bisa dihindarkan, membuat berbagai pihak gencar menyuarakan cara untuk mengurangi atau menghentikan peningkatan kadar polusi di kota-kota besar di Indonesia. Salah satu solusi tersebut adalah penggunaan energi alternatif sebagai pengganti energi konvensional. Dari kasus tersebut, lahirlah aplikasi berbasis website bernama EnerGIS.</span>
             <span style="font-size: 18px;width: 90%;margin-top: 2%;color: #706D6D;line-height: 30px;">EnerGIS berperan sebagai website edukatif yang menyediakan informasi terkait energi alternatif, dimana para pengguna dapat mengetahui lokasi, detail dan penjelasan, hingga berinteraksi dengan kecerdasan buatan untuk mengeksplor topik lebih dalam. Website ini diharapkan dapat mengembangkan kesadaran dan wawasan pengguna terkait energi alternatif di Indonesia.</span>
         </div>
-        <div style="background-color: none;display: grid;width: 40%;grid-template-columns: 50% 50%;height: 70vh;">           
+        <div style="background-color: none;display: grid;width: 40%;grid-template-columns: 50% 50%;height: 70vh;">
             <img width="90%" height="90%" src="image/image_tentang1.png" >
             <img width="90%" height="90%" src="image/image_tentang2.png" >
             <img width="90%" height="90%" src="image/image_tentang3.png" >
@@ -88,7 +89,7 @@
             <span style="color: white;font-weight: 600;line-height: 1.5;">Tautan<br><a style="font-weight: 200;">Pembangkit Listrik</a><br><a style="font-weight: 200;">SPKLU</a><br><a style="font-weight: 200;">Chatbot</a></span>
             <span style="color: white;font-weight: 600;line-height: 1.5;">Tentang<br><a style="font-weight: 200;">Kontak</a><br><a style="font-weight: 200;">Tim</a></span>
             <span style="color: white;line-height: 1.5;text-align: right;">Kukuk Ruyuk Team<br><span>Teknologi Rekayasa Perangkat Lunak</span><br><span>Sekolah Vokasi Institut Pertanian Bogor</span><br><span>Bogor, Indonesia</span></span>
-            
+
         </div>
         <div class="footer" >
             <span style="color: white;font-size: 12px;margin-right: 2%;">HAK CIPTA &copy; 2023 KUKUK RUYUK</span>
@@ -106,7 +107,7 @@
                 cards.forEach((c) => c.classList.remove("active"));
                 // Add the "active" class to the clicked card
                 this.classList.add("active");
-                
+
             });
         });
     });

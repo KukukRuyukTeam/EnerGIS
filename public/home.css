@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;500;800&display=swap');
 
 body{
     width: 100%;
@@ -29,7 +30,7 @@ nav a{
     background-image: url(image/search_icon.png);
     background-repeat: no-repeat;
     background-size: 2.5%;
-    background-position: 2%; 
+    background-position: 2%;
     border-color: #DFDFDF;
     border-radius:10px;
     height: 7vh;
@@ -44,8 +45,8 @@ nav a{
     left: 6%;
     opacity: 0.5;
 }
-.search:focus { 
-    background-image: none; 
+.search:focus {
+    background-image: none;
     border: none;
     outline: none;
 }
@@ -68,7 +69,7 @@ nav a{
     100% {
         transform: scaleY(0);
     }
-} 
+}
 
 .slide-side-element {
     width: 60%;
@@ -86,7 +87,7 @@ nav a{
     100% {
         transform: scaleX(0);
     }
-} 
+}
 .slide-side-element2{
     left: 60%;
     width: 40%;
@@ -128,7 +129,7 @@ nav a{
     position: absolute;
     top: 130%;
     background-color: white;
-    
+
 }
 .slide-down-card.animate{
     animation: fadeFromTop 3s ease-in-out forwards;
@@ -204,7 +205,7 @@ nav a{
 }
 .judul.animate{
     animation: upDown 4s ease-in;
-    
+
 }
 .pembangkit-listrik.animate{
     animation: upDown 4s ease-in;
@@ -225,7 +226,7 @@ nav a{
     100% {
         opacity: 1;
     }
-} 
+}
 .footer {
     padding-top: 2%;
     margin-left: 5%;
@@ -323,4 +324,36 @@ nav a{
 
 .activee {
     background-color: #5198F8;
+}
+.kategori{
+    display: flex;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+.btn-pulau{
+    font-family: Lexend;
+    font-size: 14px;
+    font-weight: 600;
+    color: #021C3F;
+    width: 15%;
+    height: 5vh;
+    border-radius: 40px;
+    border: 0.5px solid #062F6C;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(20, 17, 17, 0.71);
+    margin-left: 7px;
+
+}
+.btn-pulau.active{
+    font-family: Lexend;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    width: 15%;
+    height: 5vh;
+    border-radius: 40px;
+    border: none;
+    background: #062F6C;
+    box-shadow: 0px 1px 2px 0px rgba(20, 17, 17, 0.71);
+    margin-left: 7px;
 }

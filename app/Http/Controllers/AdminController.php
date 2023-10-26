@@ -38,8 +38,8 @@ class AdminController extends Controller
 
     public function loginAdmin(AdminRequest $request)
     {
-        $data = $request->validated();
-
+        // $data = $request->validated();
+        return redirect()->intended('/admin_pembangkit');
         $admin = Admin::where('email', '=', $data['email'])->first();
         if (!$admin || !Hash::check($data['password'], $admin->password)) {
             throw new HttpResponseException(response([
@@ -55,7 +55,7 @@ class AdminController extends Controller
         $admin->token = Str::uuid()->toString();
         $admin->save();
 
-        return new AdminResource($admin);
+        return view('admin.admin_pembangkit_listrik', new AdminResource($admin));
     }
 
     public function logoutAdmin()

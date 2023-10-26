@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::raw("CREATE EXTENSION IF NOT EXISTS postgis;");
+        DB::raw("CREATE EXTENSION IF NOT EXISTS uuid-ossp;");     
 
         Schema::create('pembangkit', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));

@@ -6,15 +6,16 @@
 
     <link rel="stylesheet" href="{{ asset('/leaflet.css') }}" />
     <link rel="stylesheet" href="{{ asset('/pembangkit_listrik.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- [if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif] -->
 
-    
+
 </head>
 <body>
-    
+
     <div id="sidebar">
         <div class="container-detail" id="sidebar-content">
-            
+
         </div>
     </div>
 
@@ -22,15 +23,15 @@
     <div class="list-view" id="list-view">
         <img width="30%" src="image/logo_biru.png" style="margin-top: 5%;">
         <input type="text" id="search" class="search" placeholder="Cari pembangkit listrik" oninput="removeBackground()">
-        <div style="overflow-x: hidden;width: 92%;">
+        <div style="width: 92%;">
             <div class="list-kategori">
-                <button class="btn-kategori active">PLTA</button>
-                <button class="btn-kategori">PLTS</button>
-                <button class="btn-kategori">PLTP</button>
-                <button class="btn-kategori">PLTB</button>
-                <button class="btn-kategori">PLTMH</button>
-                <button class="btn-kategori">PLTM</button>
-                <button class="btn-kategori">PLTBm</button>
+                <button class="btn-kategori active" onclick="getContent('plta')">PLTA</button>
+                <button class="btn-kategori" id="plts" onclick="getContent('plts')">PLTS</button>
+                <button class="btn-kategori" onclick="getContent('pltp')">PLTP</button>
+                <button class="btn-kategori" onclick="getContent('pltb')">PLTB</button>
+                <button class="btn-kategori" onclick="getContent('pltmh')">PLTMH</button>
+                <button class="btn-kategori" onclick="getContent('pltm')">PLTM</button>
+                <button class="btn-kategori" onclick="getContent('pltbm')">PLTBm</button>
             </div>
         </div>
         <div class="container-list" id="container-list">
@@ -53,7 +54,6 @@
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="{{ asset('/leaflet.js') }}"></script>
-    <script src="data/RumahSakitKlinik_2.js"></script>
 
     <script>
         function maximize(){
@@ -74,32 +74,66 @@
 
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: 'Map data &copy; OpenStreetMap contributors' 
+            attribution: 'Map data &copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        async function getContent() {
-            return json_RumahSakitKlinik_2.features[0].properties
-        }
+        async function getContent(kategori) {
+            const btnKategori = document.querySelectorAll(".btn-kategori");
+            btnKategori.forEach((card) => {
+                card.addEventListener("click", function () {
+                    btnKategori.forEach((c) => c.classList.remove("active"));
+                    this.classList.add("active");
 
-        var marker = L.marker([-6.600312,106.794886]).addTo(map).on('click', function () {
-            getContent().then(res=>{
-                set_sidebar_content(res);
-                sidebar.toggle();
-            }).catch(err=>{
-                console.error(err)
-            })
-            
-            
-        });
+                });
+            });
+            const response = await axios.get(`{{url("api/pembangkit/")}}${kategori}`)
+            return response.data.data
+        }
+        const setPembangkit = async () =>{
+            L.geoJson(await getContent(), {
+                onEachFeature: function (feature, layer) {
+                    set_sidebar_content(feature.properties)
+                    layer.on('click', () => {
+                        if (sidebar.isVisible() &&
+                            feature.properties.name != document.getElementsByClassName("nama-detail")[0].innerHTML ) {
+                            set_sidebar_content(feature.properties)
+                        } else {
+                            sidebar.toggle();
+                        }
+                        map.setView(layer.getLatLng())
+                    })
+                },
+                pointToLayer: function (feature, latlng) { // Buat nampilin marker
+                    return L.marker(latlng, { icon: L.icon({
+                            iconUrl: '/image/icon_github.png',
+                            iconSize: [20, 20]
+                        }) });
+                }
+            }).addTo(map)
+
+        };  setPembangkit()
+
+
+        // var marker = L.marker([-6.600312,106.794886]).addTo(map).on('click', function () {
+        //     getContent().then(res=>{
+        //         console.log(res)
+        //         return
+        //         set_sidebar_content(res);
+        //         sidebar.toggle();
+        //     }).catch(err=>{
+        //         console.error(err)
+        //     })
+        // });
 
         var sidebar = L.control.sidebar('sidebar', {
             closeButton: true,
             position: 'right'
         });
-        map.addControl(sidebar); 
+        map.addControl(sidebar);
 
         map.on('click', function () {
-            sidebar.hide();
+            // sidebar.hide();
+            sidebar.toggle();
         })
 
         sidebar.on('show', function () {
@@ -126,7 +160,7 @@
             <div style="width: 90%;margin-left: 5%;display: flex;flex-direction: column;margin-top: 12%;">
                 <div style="margin-top: 2%;">
                     <img width="6%" src="image/logo_plta.png">
-                    <span class="nama-detail">${content.NIM}</span>
+                    <span class="nama-detail">${content.name}</span>
                 </div>
                 <span class="alamat-detail">Aranio, Kec. Aranio, Kabupaten Banjar, Kalimantan Selatan 70671</span>
                 <span style="margin-top: 4%;font-weight: 500;font-size: 14px;color: #4D4D4D;">Deskripsi</span>
@@ -150,7 +184,7 @@
                 <span class="deskripsi">Air dari sungai dibendung dan ditampung dalam waduk. Saat diperlukan, air dialirkan melalui pintu pengambilan air dan melalui terowongan tekan. Air melewati tangki pendatar dan mengalir melalui pipa pesat. Air akan menuju ke rumah keong yang memutar turbin. Melalui pipa lepas, ar dibuang ke saluran pembuangan. Poros turbin dihubungkan dengan poros generator sehingga energi listrik terbangkitkan. Setelah tegangan ditinggikan menggunakan tranformator utama, energi listrik disalurkan menggunakan saluran transmisi. Saluran transmisi yang digunakan adalah Saluran Udara Tegangan Tinggi. Tegangan nominal yang diterapkan pada saluran adalah 70 kiloVolt.</span>
             </div>
             `
-            document.getElementById("sidebar-content").innerHTML = template
+            sidebar.setContent(template)
         }
     </script>
 </body>

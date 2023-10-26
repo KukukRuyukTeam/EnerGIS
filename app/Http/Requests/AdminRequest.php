@@ -25,7 +25,7 @@ class AdminRequest extends FormRequest
     {
         return [
             'email' => ['required', 'max:100'],
-            'nama' => ['string'],
+            // 'nama' => ['string'],
             'password' => ['required', 'max:100']
         ];
     }
