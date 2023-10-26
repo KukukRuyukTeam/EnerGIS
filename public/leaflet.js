@@ -14,7 +14,7 @@ L.Control.Sidebar = L.Control.extend({
         // Find content container
         var content = this._contentContainer = L.DomUtil.get(placeholder);
 
-        // Remove the content container from its original parent        
+        // Remove the content container from its original parent
         if(content.parentNode != undefined){
           content.parentNode.removeChild(content);
         }
@@ -126,11 +126,11 @@ L.Control.Sidebar = L.Control.extend({
     show: function () {
         if (!this.isVisible()) {
             L.DomUtil.addClass(this._container, 'visible');
-            if (this.options.autoPan) {
-                this._map.panBy([-this.getOffset() / 2, 0], {
-                    duration: 0.5
-                });
-            }
+            // if (this.options.autoPan) {
+            //     this._map.panBy([-this.getOffset() / 2, 0], {
+            //         duration: 0.5
+            //     });
+            // }
             this.fire('show');
         }
     },
@@ -138,11 +138,11 @@ L.Control.Sidebar = L.Control.extend({
     hide: function (e) {
         if (this.isVisible()) {
             L.DomUtil.removeClass(this._container, 'visible');
-            if (this.options.autoPan) {
-                this._map.panBy([this.getOffset() / 2, 0], {
-                    duration: 0.5
-                });
-            }
+            // if (this.options.autoPan) {
+            //     this._map.panBy([-155, 0], {
+            //         duration: 0.5
+            //     });
+            // }
             this.fire('hide');
         }
         if(e) {

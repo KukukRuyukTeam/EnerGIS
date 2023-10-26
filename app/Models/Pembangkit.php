@@ -32,8 +32,8 @@ class Pembangkit extends Model
             "geometry" => [
                 "type" => "Point",
                 "coordinates" => [
-                    (double) $this->longitude,
-                    (double) $this->latitude
+                    (double) $this->latitude,
+                    (double) $this->longitude
                 ]
             ],
             "properties" => [
