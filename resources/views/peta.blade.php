@@ -20,6 +20,27 @@
     </div>
 
     <div id="map"></div>
+    <div>
+        <div style="display: flex;flex-direction: column;border-radius: 10px;border: 2px solid #5198F8;width: 20%;justify-content: center;background-color: white;padding: 10px;margin-bottom: 1vh;position: absolute;bottom: 10%;right: 0;margin-right: 2%;" id="containerChat">
+            <div id="chatContentContainer">
+                {{--Content Chat--}}
+                <div class="chat-content response">
+                    <span style="color: white;font-family: Lexend;width: 90%;">Halo! Saya adalah ChatBot yang berfungsi sebagai asisten virtual untuk EnerGIS, website yang berisi informasi tentang energi terbarukan di Indonesia. Bagaimana saya dapat membantu Anda hari ini?</span>
+                </div>
+                {{--Content Chat--}}
+            </div>
+
+            <div class="chat-input-container" style="height:5vh; width:95%; display:flex; flex-direction:row;">
+                <input placeholder="Apakah ada pertanyaan?" class="chat-input" id="question" style="width:90%;border:solid #FFF">
+                <img src="image/sendButton.png" onclick="sendChat()"  style="width:20px; height:20px; cursor:pointer; align-self:center;display:flex;">
+            </div>
+        </div>
+
+        <div style="border-radius: 12px;display: flex;justify-content: center;background-color: white;width: 50px;height: 50px;align-items: center;cursor: pointer;position: absolute;top: 90%;right: 0;margin-right: 2%;" id="btnChat">
+            <img src="image/chatButtonClosed.png" width="80%" height="80%" onclick="openChat()" id="iconChat">
+            <img src="image/chatButtonOpen.png" width="80%" height="80%" onclick="closeChat()" id="iconChat2" style="display: none;">
+        </div>
+    </div>
     <div class="list-view" id="list-view">
         <img width="30%" src="image/logo_biru.png" style="margin-top: 5%;">
         <input type="text" id="search" class="search" placeholder="Cari pembangkit listrik" oninput="removeBackground()">
@@ -46,7 +67,127 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="{{ asset('/leaflet.js') }}"></script>
 
-    <script>
+    <script>        
+
+        if (sessionStorage.getItem("chat-session")) {
+            const chatContent = document.getElementById('chatContentContainer')
+            const chatSessionHistory = JSON.parse(sessionStorage.getItem("chat-session"));
+            
+            let existContent = ''
+            chatSessionHistory.forEach(item => {
+                if (item.role == "user") {
+                    existContent += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;">${item.content}</span> </div>`
+                } else {
+                    existContent += `<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;">${item.content}</pre></div>`
+                }
+            })
+            
+            chatContent.innerHTML = existContent
+            chatContent.scrollTop = chatContent.scrollHeight
+        }
+        
+
+        function openChat(){
+            document.getElementById('btnChat').style.backgroundColor = "#5198F8"
+            document.getElementById('iconChat').style.display = "none"
+            document.getElementById('iconChat2').style.display = "block"
+            document.getElementById('containerChat').style.display = "flex"
+        }
+        function closeChat(){
+            document.getElementById('btnChat').style.backgroundColor = "white"
+            document.getElementById('iconChat').style.display = "block"
+            document.getElementById('iconChat2').style.display = "none"
+            document.getElementById('containerChat').style.display = "none"
+        };closeChat();
+        function sendChat(){
+            const chatContent = document.getElementById('chatContentContainer')
+            const inputBoxQuestion = document.getElementById('question')
+
+            if (inputBoxQuestion.value == "") {
+                return
+            }
+
+            chatContent.innerHTML += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;">${inputBoxQuestion.value}</span> </div>`
+            chatContent.innerHTML += `<div id="loading-chat" style="display:flex; justify-content:center; margin:3%;"> <img src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-11-849_512.gif" width="10%" alt="Loading" ></div>`
+            chatContent.scrollTop = chatContent.scrollHeight
+
+            let chatSessionHistory = [{
+                        "role" : "assistant",
+                        "content" : "Halo! Saya adalah ChatBot yang berfungsi sebagai asisten virtual untuk EnerGIS, website yang berisi informasi tentang energi terbarukan di Indonesia. Bagaimana saya dapat membantu Anda hari ini?"
+                    }]
+                    
+            if (sessionStorage.getItem("chat-session")) {
+                chatSessionHistory = JSON.parse(sessionStorage.getItem("chat-session"));
+            }
+            
+            chatSessionHistory.push({
+                "role" : "user",
+                "content" : inputBoxQuestion.value
+            })
+            inputBoxQuestion.value = ""
+            inputBoxQuestion.disabled = true
+            inputBoxQuestion.placeholder = "Tunggu sebentar, mengambil jawaban"            
+            
+            fetch('/api/chat', {
+                method: "POST",
+                headers: {
+                    'Content-Type' : "application/json"
+                },
+                body: JSON.stringify({
+                    "messages" : chatSessionHistory
+                })
+            })
+            .then(res=>{
+                document.getElementById('loading-chat').remove()
+                if(!res.ok) {
+                    chatContent.innerHTML += `<div class="chat-content error">
+                        <span style="color:#4D4D4D; font-family:Lexend;">${res.status == 500 && "Mohon maaf, ada masalah pada server"}</span>
+                        <button onclick="removeErrorElement(this)" style="color:#9c9c9c; background-color:white; font-family:Lexend; border:2px solid rgb(255, 114, 114); border-radius:5px">X</button>
+                    </div>`
+                    inputBoxQuestion.disabled = false
+                    inputBoxQuestion.placeholder = "Apakah ada pertanyaan?"
+                    return
+                }
+                return res.json()
+            }).then(res=> {
+
+                chatContent.innerHTML +=`<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;"></pre></div>`
+                const listContent = res.data.split(' ')
+                const preResponse = document.querySelectorAll('pre#direct-response')
+                let i=0;
+                const effectType = ()=> {
+                    if (i < listContent.length) {
+                        preResponse[preResponse.length-1].innerHTML += listContent[i] + " ";
+                        i++;
+                        chatContent.scrollTop = chatContent.scrollHeight
+                        setTimeout(effectType, 100);
+                    }
+                }; effectType();
+
+                inputBoxQuestion.disabled = false
+                inputBoxQuestion.placeholder = "Apakah ada pertanyaan lain?"
+
+                chatSessionHistory.push({
+                    "role" : "assistant",
+                    "content" : res.data
+                })
+                sessionStorage.setItem("chat-session", JSON.stringify(chatSessionHistory))
+            })
+            .catch(err => {
+
+            })
+        }
+
+        document.getElementById('question').addEventListener('keypress', (e) => {
+            if (e.key == "Enter") {
+                sendChat()
+            }
+        })
+        
+        function removeErrorElement(target){
+            target.parentElement.remove()
+        }
+
         function maximize(){
             document.getElementById("list-view").style.height = "80vh"
             document.getElementById("container-list").style.display = "flex"
@@ -88,7 +229,6 @@
                     markers[feature.properties.id] = layer;
                     document.getElementById(feature.properties.id).addEventListener('click', ()=>{ //onclick dari list-item
                         Object.entries(markers).forEach(([key,val]) => {
-                            console.log(key)
                             markers[key].setIcon(unSelectMarkerIcon)
                         })
 
@@ -102,6 +242,15 @@
                         } else {
                             sidebar.toggle();
                         }
+
+                        if (sidebar.isVisible()) {
+                            document.getElementById('containerChat').style.marginRight = "22%"
+                            document.getElementById('btnChat').style.marginRight = "22%"
+                        } else {
+                            document.getElementById('containerChat').style.marginRight = "2%"
+                            document.getElementById('btnChat').style.marginRight = "2%"    
+                        }
+
                         Object.entries(markers).forEach(([key,val]) => {
                             markers[key].setIcon(unSelectMarkerIcon)
                         })
@@ -110,10 +259,11 @@
                         map.setView(layer.getLatLng())
 
                         const listItem = document.querySelectorAll('.list-item');
-                        listItem.forEach((c) => c.classList.remove("active"));
                         listItem.forEach((c)=> {
                             if (c.id == feature.properties.id) {
                                 return c.classList.add("active")
+                            } else {
+                                c.classList.remove("active")
                             }
                         })
                     })
