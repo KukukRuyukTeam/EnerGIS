@@ -29,6 +29,18 @@ Route::get('/energame', function () {
     return view('energame');
 });
 
+Route::get('/soal', function () {
+    return view('soal');
+});
+
+Route::get('/rangking', function () {
+    return view('rangking');
+});
+
+Route::get('/result', function () {
+    return view('result');
+});
+
 Route::get('/admin', function () {
     return view('admin/login');
 });
