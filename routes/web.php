@@ -21,6 +21,10 @@ Route::get('/peta', function () {
     return view('peta');
 });
 
+Route::get('/pembangkit', function () {
+    return view('pembangkit_listrik');
+});
+
 Route::get('/tentang', function () {
     return view('about');
 });
