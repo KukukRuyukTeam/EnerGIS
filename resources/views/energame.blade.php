@@ -1,6 +1,3 @@
-<div>
-    <!-- He who is contented is rich. - Laozi -->
-</div>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('/energame.css') }}">
     <title>Energame</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
 <div style="background-image: url('image/banner.png');background-size: 100% 100%;background-repeat: no-repeat;">
@@ -51,9 +49,11 @@
         </div>
     </div>
 </div>
+
 <div id="loading" style="display: none;justify-content: center;width: 100vw;height: 100vh;position: absolute;top: 0;overflow: unset">
     <img src="image/Mohon_ditunggu.gif" width="100%">
 </div>
+
 <div style="width: 80%;margin-left: 10%;background-color: #5198F8;border-radius: 10px;height: 35vh;display: flex;justify-content: center;align-items: center;gap: 5%;margin-top: 5%;">
     <div style="display: flex;flex-direction: column;width: 50%;justify-content: center;align-items: center;">
         <span style="font-size: 42PX;font-family: Lexend;font-weight: 700;text-align: center;">Gunakan Kode</span>
@@ -106,11 +106,13 @@
         });
         document.getElementById('loading').style.display = 'flex';
         document.body.style.overflow = "hidden"
+
         axios.post(`{{url("api/createquestion/")}}`, {level: level}).then(res=>{
             sessionStorage.setItem('kode',res.data.kode)
             location.href = "rangking"
         }).catch(e=>{
             console.log(e)
+
             document.getElementById('loading').style.display = 'none';
             alert("gagal membuat soal, silahkan coba lagi!")
         })
@@ -131,6 +133,7 @@
         })
 
     }
+
     function level(button,level) {
         const randomId = function(length = 6) {
             return Math.random().toString(36).substring(2, length+2);
@@ -139,6 +142,7 @@
         const cards = document.querySelectorAll(".level");
         cards.forEach((c) => c.classList.remove("active"));
         button.classList.add("active")
+
         // createSoal(level)
         location.href = "rangking"
     }

@@ -8,6 +8,8 @@ use App\Models\SoalQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use OpenAI;
+
 
 class QuizController extends Controller
 {
@@ -19,7 +21,11 @@ class QuizController extends Controller
     {
         $config = require __DIR__.'/../../../config/openai.php';
         $this->API_KEY = $config['api_key'];
-        $this->openAI = \OpenAI::client($this->API_KEY);
+//        $this->openAI = \OpenAI::client($this->API_KEY);
+        $this->openAI = OpenAI::factory()
+            ->withApiKey($this->API_KEY)
+            ->withHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+            ->make();
         $this->prompt = [
             [
                 'role' => "system",
@@ -47,10 +53,9 @@ class QuizController extends Controller
         $messages = array_merge($this->prompt, [
             [
                 'role' => 'user',
-                'content' => 'buatkan ' . $jumlahSoal .' soal pilihan ganda tentang energi terbarukan dan jawaban tapi tingkat kesulitannya adalah '. $data['level'] .' tanpa adanya urutan pada jawaban, dengan format json seperti berikut {"soal":[{"pertanyaan" : disini untuk pertanyaan,"pilihan" : [berikan hanya 2 pilihan jawaban],	"jawaban" : berikan disini jawaban yang benarnya }	]} langsung respon dengan format json dan apabila pada value terdapat kata kutipan, maka tambahkan Escape Sequence setiap characternya'
+                'content' => 'buatkan ' . $jumlahSoal .' soal pilihan ganda tentang energi terbarukan dan jawaban tapi tingkat kesulitannya adalah '. $data['level'] .' tanpa adanya urutan pada jawaban, dengan format json seperti berikut {"soal":[{"pertanyaan" : disini untuk pertanyaan,"pilihan" : [berikan hanya 4 pilihan jawaban],	"jawaban" : berikan disini jawaban yang benarnya }	]} langsung respon dengan format json dan apabila pada value terdapat kata kutipan, maka tambahkan Escape Sequence setiap characternya'
             ]
         ]);
-
         $res = $this->openAI->chat()->create([
             "model" => "gpt-3.5-turbo",
             "messages" => $messages,
@@ -79,19 +84,38 @@ class QuizController extends Controller
         }
     }
 
-    public function getQuestions(string $kode)
+    public function getQuestions(Request $request)
     {
-        $soal = SoalQuiz::where('kode', '=', $kode)
+        $validator =Validator::make( $request->all(),[
+            "nama" => ["string"],
+            "kode" => ["required", 'string']
+        ]);
+        if ($validator->fails()) {
+            return response([
+                "code" => 400,
+                "error" => $validator->getMessageBag()
+            ]);
+        }
+        if ($validator->getData()["nama"]
+            && PointQuiz::where("kode_soal", $validator->getData()["kode"])
+                ->where('nama', $validator->getData()["nama"])->get()->count() > 0) {
+            return response([
+                "code" => 409,
+                "error" => "nama sudah ada pada kode ini"
+            ], 409);
+        }
+
+        $soal = SoalQuiz::where('kode', '=', $validator->getData()["kode"])
             ->select([
                 "id",
                 "pertanyaan",
                 "pilihan"
             ])
             ->get();
-        return [
-            "kode" => $kode,
+        return response([
+            "kode" => $validator->getData()["kode"],
             "data" => $soal
-        ];
+        ]);
     }
 
     public function validateAnswear(Request $request)
@@ -99,31 +123,32 @@ class QuizController extends Controller
 
         $validator = Validator::make($request->all(),[
             'id_soal' => ['required', 'string'],
-            'nama' => ['required', 'string'],
+            'nama' => ['string'],
             'kode_soal' => ['required', 'string', 'max:5'],
             'jawaban' => ['required', 'string']
         ]);
 
         if ($validator->fails()) {
-            return [
+            return response([
                 "code" => 400,
                 "errors" => $validator->getMessageBag()
-            ];
+            ], 400);
         }
 
         $data = $validator->getData();
 
         $soal = SoalQuiz::where('id', '=', $data['id_soal'])->first();
         if (!$soal->exists()) {
-            return [
+            return response([
                 "code" => 404,
                 "errors" => 'soal tidak diketahui'
-            ];
+            ], 404);
         } elseif ($soal->jawaban != $data['jawaban']) {
             return [
                 "id_soal" => $data['id_soal'],
                 "kode_soal" => $data['kode_soal'],
-                "jawaban" => false
+                "status" => false,
+                "jawaban" => $soal->jawaban
             ];
         }
 
@@ -141,7 +166,8 @@ class QuizController extends Controller
         return [
             "id_soal" => $data['id_soal'],
             "kode_soal" => $data['kode_soal'],
-            "jawaban" => true
+            "status" => true,
+            "jawaban" => $soal->jawaban
         ];
     }
 

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;500;800&display=swap');
+
+.jawaban{
+    width: 100%;
+    background-color: #ABABAB;
+    border-radius: 10px;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.jawaban.active{
+    background-color: #5198F8;
+}
+.jawaban.true{
+    background-color: #43D02C;
+}
+.jawaban.false{
+    background-color: #BF3535;
+}

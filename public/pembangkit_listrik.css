@@ -261,6 +261,15 @@ z-index: 1000; }
   align-items: center;
     cursor: pointer;
 }
+.list-item.active{
+    background: #F3F8FF;
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+}
 ::-webkit-scrollbar {
     width: 2px;
     background-color: white;
@@ -346,7 +355,7 @@ pre {
   word-wrap: break-word;
   box-sizing: border-box;
   white-space: pre-wrap;
-    margin: 0;
+  margin: 0;
 }
 .hidden {
     display: none;

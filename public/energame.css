@@ -1,0 +1,133 @@
+.btn-gabung{
+    font-family: Lexend;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    width: 8%;
+    height: 6vh;
+    border: none;
+    border-radius: 7px;
+    background: #2B347C;
+    margin-left: 7px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: 11%;
+}
+.input-code{
+    height: 9vh;
+    width: 50%;
+    border-radius: 7px;
+    border: none;
+    padding-left: 5%;
+    font-family: Lexend;
+    font-size: 18px;
+    font-weight: 600;
+    color: #B7B7B7;
+}
+.input-code:placeholder-shown{
+    font-family: Lexend;
+    font-size: 18px;
+    font-weight: 600;
+    color: #B7B7B7;
+}
+.input-code:focus{
+    border: none;
+    outline: none;
+}
+.input-code::placeholder{
+    color: #B7B7B7;
+
+}
+.level{
+    display: flex;
+    flex-direction: column;
+    background-color: #B9D7FF;
+    border-radius: 20px;
+    border: 1px solid #5198F8;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 22%;
+    cursor: pointer;
+}
+.level.active{
+    background-color: #5198F8;
+    color: white;
+}
+.btn-start{
+    font-family: Lexend;
+    font-size: 20px;
+    font-weight: 600;
+    color: #5198F8;
+    width: 10%;
+    height: 7vh;
+    border: 1px solid #5198F8;
+    border-radius: 40px;
+    background: white;
+    margin-left: 7px;
+    cursor: pointer;
+    margin-top: 3%;
+}
+.card-medal{
+    width: 30%;
+    display: flex;
+    height: 40vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.text-rank{
+    color: #808080;
+    text-align: center;
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 5%;
+}
+.text-rank.active{
+    color: black;
+}
+.text-rank.list{
+    margin-top: 0;
+}
+.list-rangking{
+    width: 54%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 10px;
+    border: 1px solid #C4C4C4;
+    align-items: center;
+    height: 10vh;
+    margin-top: 5%;
+}
+.modal-nama{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 0px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 40vh;
+}
