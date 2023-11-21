@@ -96,8 +96,8 @@
 </div>
 </body>
 <script>
-    sessionStorage.setItem('questionNumber',0)
-    sessionStorage.setItem('kode',"47590")
+    // sessionStorage.setItem('questionNumber',0)
+    // sessionStorage.setItem('kode',"47590")
 
     async function createSoal(level) {
         window.scrollTo({
@@ -143,8 +143,8 @@
         cards.forEach((c) => c.classList.remove("active"));
         button.classList.add("active")
 
-        // createSoal(level)
-        location.href = "rangking"
+        createSoal(level)
+        // location.href = "rangking"
     }
 </script>
 </html>

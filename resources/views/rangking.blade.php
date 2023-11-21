@@ -96,6 +96,7 @@
         return response.data.data
     }
     getSkor().then(res => {
+        if (res.length === 0) return
         document.getElementById("juara1").innerHTML = `
             <span class="text-rank active">${res[0].nama}</span>
             <span class="text-rank active">${res[0].jumlah}</span>

@@ -112,18 +112,9 @@
 <div class="slide-side-card"></div>
 <div class="slide-side-card2"></div>
 <div class="slide-down-card"></div>
-{{--<div style="display: flex;justify-content: space-between;">--}}
-{{--    <span class="judul">Pembangkit Listrik dan Charging  Station<br><span style="color: #333333;font-size: 15px;">Sebaran sumber energi alternatif di Indonesia</span></span>--}}
-{{--    <span class="judul jumlah-listrik" style="margin-left: 2%;width: 10%;">66000MW+<br><span--}}
-{{--            style="color: #333333;font-size: 15px;">Listrik dihasilkan</span></span>--}}
-{{--    <span class="judul pembangkit-listrik" style="color: #6D6D6D;margin-left: 4%;width: 12%;">300+<br><span--}}
-{{--            style="color: #333333;font-size: 15px;">Pembangkit listrik</span></span>--}}
-{{--    <span class="judul charging-station" style="color: #43CF2C;margin-left: 0;width: 15%;">800+<br><span--}}
-{{--            style="color: #333333;font-size: 15px;">SPKLU</span></span>--}}
-{{--</div>--}}
 <img id="pulau" class="peta-penyebaran" width=90%" style="margin-left: 5%;margin-top: 2%;" src="image/sumatera.png">
 <div class="kategori">
-    <button class="btn-pulau active" onclick="pulau('sumatera')">SUMATERA</button>
+    <button class="btn-pulau active" onclick="pulau(this,'sumatera')">SUMATERA</button>
     <button class="btn-pulau" onclick="pulau(this,'jawa')">JAWA</button>
     <button class="btn-pulau" onclick="pulau(this,'nusa_tenggara')">NUSA TENGGARA</button>
     <button class="btn-pulau" onclick="pulau(this,'kalimantan')">KALIMANTAN</button>
@@ -173,7 +164,7 @@
     const slideCard = document.querySelector(".slide-side-card");
     const slideCard2 = document.querySelector(".slide-side-card2");
     const slideCard3 = document.querySelector(".slide-down-card");
-    const judul = document.querySelector(".judul");
+    // const judul = document.querySelector(".judul");
     const jumlahListrik = document.querySelector(".jumlah-listrik");
     const pembangkitListrik = document.querySelector(".pembangkit-listrik");
     const chargingStation = document.querySelector(".charging-station");
@@ -195,19 +186,19 @@
     }, options);
     observer.observe(slideCard);
 
-    const observer2 = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                judul.classList.add("animate");
-                jumlahListrik.classList.add("animate");
-                pembangkitListrik.classList.add("animate");
-                chargingStation.classList.add("animate");
-                petaPenyebaran.classList.add("animate");
-                observer.unobserve(entry.target); // Stop observing once animation is triggered
-            }
-        });
-    }, options);
-    observer2.observe(judul);
+    // const observer2 = new IntersectionObserver((entries, observer) => {
+    //     entries.forEach((entry) => {
+    //         if (entry.isIntersecting) {
+    //             judul.classList.add("animate");
+    //             jumlahListrik.classList.add("animate");
+    //             pembangkitListrik.classList.add("animate");
+    //             chargingStation.classList.add("animate");
+    //             petaPenyebaran.classList.add("animate");
+    //             observer.unobserve(entry.target); // Stop observing once animation is triggered
+    //         }
+    //     });
+    // }, options);
+    // observer2.observe(judul);
 
     const scrollableContent = document.querySelector(".slideshow-container");
     let isDragging = false;
@@ -240,13 +231,14 @@
     });
 
     function startSlideshow() {
-        const slideshow = document.getElementById('slideshow');
-        slideshow.style.animation = 'slideshow 9s linear infinite'; // Mulai animasi
+        const slideshow = document.getElementsByClassName('slideshow-viewport')
+        // const slideshow = document.getElementById('slideshow');
+        slideshow[0].style.animation = 'slideshow 9s linear infinite'; // Mulai animasi
 
         setTimeout(function () {
-            slideshow.style.animation = 'none'; // Hentikan animasi
+            slideshow[0].style.animation = 'none'; // Hentikan animasi
             setTimeout(function () {
-                slideshow.style.animation = 'slideshow 9s linear infinite'; // Mulai lagi setelah jeda
+                slideshow[0].style.animation = 'slideshow 9s linear infinite'; // Mulai lagi setelah jeda
             }, 3000); // Jeda selama 3 detik (3000 milidetik)
         }, 3000); // Jeda selama 3 detik (3000 milidetik)
     }
