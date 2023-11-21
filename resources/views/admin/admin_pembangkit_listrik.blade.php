@@ -9,9 +9,7 @@
 <body>
     <div class="header">
         <img src="image/logo_biru.png" width="8%" style="margin-left: 2%;">
-        <input type="text" class="search" placeholder="Temukan data energi terbarukan">
-        <button class="btn-plt">Pembangkit Listrik</button>
-        <button class="btn-spklu">Quiz</button>
+        <input type="text" class="search" style="width: 80%" placeholder="Temukan data energi terbarukan">
     </div>
     <div class="kategori">
         <button class="btn-kategori active">PLTA</button>
@@ -76,8 +74,8 @@
                                 <div class="custom__image-container"></div>
                                     <label id="add-img-label" for="imageInput">+</label>
                                     <input type="file" class="input-image" id="imageInput" accept="image/*" onchange="displayImage()">
-                                </div> 
-                            </div>    
+                                </div>
+                            </div>
                             <div class="container-input" style="margin-top: 2%;">
                                 <span style="margin-left: 6%;"><span style="width: 11vw;display: inline-block;">Nama</span><span style="opacity: 65%;font-size: 14px;">:&nbsp;</span></span>
                                 <input type="tex" class="input">
@@ -118,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </body>
@@ -132,7 +130,7 @@
                 cards.forEach((c) => c.classList.remove("active"));
                 // Add the "active" class to the clicked card
                 this.classList.add("active");
-                
+
             });
         });
     });
@@ -140,7 +138,7 @@
             const input = document.getElementById('imageInput');
             const preview = document.getElementById('previewImage');
             const label = document.getElementById('add-img-label');
-            
+
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 

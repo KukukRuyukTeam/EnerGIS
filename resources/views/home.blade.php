@@ -25,7 +25,7 @@
             style="display: flex;margin-top: 1%;margin-bottom: 2%;justify-content: center;flex-direction: column;align-items: center;">
             <span style="color: WHITE;font-size: 48PX;font-family: poppins;font-weight: 800;text-align: center;"><span
                     style="color: #B9D7FF;">Keberlanjutan</span> Dimulai<br>Dengan Energi <span style="color: #B9D7FF;">Terbarukan</span></span>
-            <input type="text" class="search" placeholder="Temukan lokasi energi terbarukan">
+            <input type="text" style="display: none" class="search" placeholder="Temukan lokasi energi terbarukan">
         </div>
     </div>
 </div>
@@ -121,14 +121,14 @@
 {{--    <span class="judul charging-station" style="color: #43CF2C;margin-left: 0;width: 15%;">800+<br><span--}}
 {{--            style="color: #333333;font-size: 15px;">SPKLU</span></span>--}}
 {{--</div>--}}
-<img id="pulau" class="peta-penyebaran" width="90%" style="margin-left: 5%;margin-top: 2%;">
+<img id="pulau" class="peta-penyebaran" width=90%" style="margin-left: 5%;margin-top: 2%;" src="image/sumatera.png">
 <div class="kategori">
     <button class="btn-pulau active" onclick="pulau('sumatera')">SUMATERA</button>
-    <button class="btn-pulau" onclick="pulau('jawa')">JAWA</button>
-    <button class="btn-pulau" onclick="pulau('nusa_tenggara')">NUSA TENGGARA</button>
-    <button class="btn-pulau" onclick="pulau('kalimantan')">KALIMANTAN</button>
-    <button class="btn-pulau" onclick="pulau('sulawesi')">SULAWESI</button>
-    <button class="btn-pulau" onclick="pulau('papua')">PAPUA</button>
+    <button class="btn-pulau" onclick="pulau(this,'jawa')">JAWA</button>
+    <button class="btn-pulau" onclick="pulau(this,'nusa_tenggara')">NUSA TENGGARA</button>
+    <button class="btn-pulau" onclick="pulau(this,'kalimantan')">KALIMANTAN</button>
+    <button class="btn-pulau" onclick="pulau(this,'sulawesi')">SULAWESI</button>
+    <button class="btn-pulau" onclick="pulau(this,'papua')">PAPUA</button>
 </div>
 <div style="width: 94%;background-color: #021C3F;height: 20vh;margin-top: 10%;padding: 3%;">
     <div style="display: flex;flex-direction: row;justify-content: space-around;">
@@ -254,22 +254,29 @@
     // Mulai slideshow setelah halaman selesai dimuat
     window.onload = startSlideshow;
 
-    function pulau(nama) {
+    function pulau(button,nama) {
         const cards = document.querySelectorAll(".btn-pulau");
         var image = document.getElementById("pulau");
         if(nama == "jawa"){
             image.src = "image/jawa.png";
         }
-        cards.forEach((card) => {
-            card.addEventListener("click", function () {
-                console.log(nama)
-                // Remove the "active" class from all cards
-                cards.forEach((c) => c.classList.remove("active"));
-                // Add the "active" class to the clicked card
-                this.classList.add("active");
-
-            });
-        });
+        if(nama == "sumatera"){
+            image.src = "image/sumatera.png";
+        }
+        if(nama == "kalimantan"){
+            image.src = "image/kalimantan.png";
+        }
+        if(nama == "sulawesi"){
+            image.src = "image/sulawesi.png";
+        }
+        if(nama == "nusa_tenggara"){
+            image.src = "image/nusa_tenggara.png";
+        }
+        if(nama == "papua"){
+            image.src = "image/papua.png";
+        }
+        cards.forEach((c) => c.classList.remove("active"));
+        button.classList.add("active")
     }
 </script>
 </html>

@@ -36,7 +36,7 @@ class QuizController extends Controller
 
     public function createQuestion(Request $request)
     {
-        $jumlahSoal = 5;
+        $jumlahSoal = 3;
 
         $validator = Validator::make($request->all(), [
             'level' => ['required', 'string', 'in:beginner,intermediate,advance']

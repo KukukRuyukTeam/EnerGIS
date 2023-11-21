@@ -21,11 +21,11 @@
 
     <div id="map"></div>
     <div>
-        <div style="display: flex;flex-direction: column;border-radius: 10px;border: 2px solid #5198F8;width: 20%;justify-content: center;background-color: white;padding: 10px;margin-bottom: 1vh;position: absolute;bottom: 10%;right: 0;margin-right: 2%;" id="containerChat">
+        <div style="display: flex;flex-direction: column;border-radius: 10px;border: 2px solid #5198F8;width: 30%;justify-content: center;background-color: white;padding: 10px;margin-bottom: 1vh;position: absolute;bottom: 10%;right: 0;margin-right: 2%;" id="containerChat">
             <div id="chatContentContainer">
                 {{--Content Chat--}}
                 <div class="chat-content response">
-                    <span style="color: white;font-family: Lexend;width: 90%;">Halo! Saya adalah ChatBot yang berfungsi sebagai asisten virtual untuk EnerGIS, website yang berisi informasi tentang energi terbarukan di Indonesia. Bagaimana saya dapat membantu Anda hari ini?</span>
+                    <span style="color: white;font-family: Lexend;width: 90%;font-size: 12px">Halo! Saya adalah ChatBot yang berfungsi sebagai asisten virtual untuk EnerGIS, website yang berisi informasi tentang energi terbarukan di Indonesia. Bagaimana saya dapat membantu Anda hari ini?</span>
                 </div>
                 {{--Content Chat--}}
             </div>
@@ -42,8 +42,8 @@
         </div>
     </div>
     <div class="list-view" id="list-view">
-        <img width="30%" src="image/logo_biru.png" style="margin-top: 5%;">
-        <input type="text" id="search" class="search" placeholder="Cari pembangkit listrik" oninput="removeBackground()">
+        <img width="30%" src="image/logo_biru.png" style="margin-top: 5%;cursor: pointer" onclick="location.href= '/'">
+        <input type="text" id="search" onkeyup="searchFunction()" class="search" placeholder="Cari pembangkit listrik">
         <div style="width: 92%;">
             <div class="list-kategori">
                 <button class="btn-kategori active" onclick="changeCategory('plta')">PLTA</button>
@@ -56,36 +56,39 @@
             </div>
         </div>
         <div class="container-list" id="container-list"></div>
-        <svg xmlns="http://www.w3.org/2000/svg" id="maximize" width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;transform:rotate(180deg)" onclick="maximize()">
-            <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" id="minimize" width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;display:none" onclick="minimize()">
-            <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
-        </svg>
+        <div style="width: 100%;height: 7vh;display: flex;justify-content: center;cursor: pointer" onclick="maximize()" id="maximize">
+            <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;transform:rotate(180deg)" >
+                <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
+            </svg>
+        </div>
+        <div style="width: 100%;height: 7vh;justify-content: center;display: none;cursor: pointer" onclick="minimize()" id="minimize">
+            <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;" >
+                <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
+            </svg>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="{{ asset('/leaflet.js') }}"></script>
 
-    <script>        
+    <script>
 
         if (sessionStorage.getItem("chat-session")) {
             const chatContent = document.getElementById('chatContentContainer')
             const chatSessionHistory = JSON.parse(sessionStorage.getItem("chat-session"));
-            
+
             let existContent = ''
             chatSessionHistory.forEach(item => {
                 if (item.role == "user") {
-                    existContent += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;">${item.content}</span> </div>`
+                    existContent += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;font-size: 12px">${item.content}</span> </div>`
                 } else {
-                    existContent += `<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;">${item.content}</pre></div>`
+                    existContent += `<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;font-size: 12px">${item.content}</pre></div>`
                 }
             })
-            
+
             chatContent.innerHTML = existContent
             chatContent.scrollTop = chatContent.scrollHeight
         }
-        
 
         function openChat(){
             document.getElementById('btnChat').style.backgroundColor = "#5198F8"
@@ -107,7 +110,7 @@
                 return
             }
 
-            chatContent.innerHTML += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;">${inputBoxQuestion.value}</span> </div>`
+            chatContent.innerHTML += `<div class="chat-content question"> <span style="color: #4D4D4D;font-family: Lexend;width: 90%;font-size: 12px">${inputBoxQuestion.value}</span> </div>`
             chatContent.innerHTML += `<div id="loading-chat" style="display:flex; justify-content:center; margin:3%;"> <img src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-11-849_512.gif" width="10%" alt="Loading" ></div>`
             chatContent.scrollTop = chatContent.scrollHeight
 
@@ -115,18 +118,18 @@
                         "role" : "assistant",
                         "content" : "Halo! Saya adalah ChatBot yang berfungsi sebagai asisten virtual untuk EnerGIS, website yang berisi informasi tentang energi terbarukan di Indonesia. Bagaimana saya dapat membantu Anda hari ini?"
                     }]
-                    
+
             if (sessionStorage.getItem("chat-session")) {
                 chatSessionHistory = JSON.parse(sessionStorage.getItem("chat-session"));
             }
-            
+
             chatSessionHistory.push({
                 "role" : "user",
                 "content" : inputBoxQuestion.value
             })
             inputBoxQuestion.value = ""
             inputBoxQuestion.disabled = true
-            inputBoxQuestion.placeholder = "Tunggu sebentar, mengambil jawaban"            
+            inputBoxQuestion.placeholder = "Tunggu sebentar, mengambil jawaban"
             
             fetch('/api/chat', {
                 method: "POST",
@@ -141,7 +144,7 @@
                 document.getElementById('loading-chat').remove()
                 if(!res.ok) {
                     chatContent.innerHTML += `<div class="chat-content error">
-                        <span style="color:#4D4D4D; font-family:Lexend;">${res.status == 500 && "Mohon maaf, ada masalah pada server"}</span>
+                        <span style="color:#4D4D4D; font-family:Lexend;font-size: 12px">${res.status == 500 && "Mohon maaf, ada masalah pada server"}</span>
                         <button onclick="removeErrorElement(this)" style="color:#9c9c9c; background-color:white; font-family:Lexend; border:2px solid rgb(255, 114, 114); border-radius:5px">X</button>
                     </div>`
                     inputBoxQuestion.disabled = false
@@ -151,7 +154,7 @@
                 return res.json()
             }).then(res=> {
 
-                chatContent.innerHTML +=`<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;"></pre></div>`
+                chatContent.innerHTML +=`<div class="chat-content response"><pre id="direct-response" style="color: white;font-family: Lexend;width: 90%;font-size: 12px"></pre></div>`
                 const listContent = res.data.split(' ')
                 const preResponse = document.querySelectorAll('pre#direct-response')
                 let i=0;
@@ -183,7 +186,7 @@
                 sendChat()
             }
         })
-        
+
         function removeErrorElement(target){
             target.parentElement.remove()
         }
@@ -192,12 +195,12 @@
             document.getElementById("list-view").style.height = "80vh"
             document.getElementById("container-list").style.display = "flex"
             document.getElementById("maximize").style.display = "none"
-            document.getElementById("minimize").style.display = "block"
+            document.getElementById("minimize").style.display = "flex"
         }
         function minimize(){
             document.getElementById("list-view").style.height = "23vh"
             document.getElementById("container-list").style.display = "none"
-            document.getElementById("maximize").style.display = "block"
+            document.getElementById("maximize").style.display = "flex"
             document.getElementById("minimize").style.display = "none"
         }
         var map = L.map('map').setView([-0.220,121.465], 5);
@@ -248,7 +251,7 @@
                             document.getElementById('btnChat').style.marginRight = "22%"
                         } else {
                             document.getElementById('containerChat').style.marginRight = "2%"
-                            document.getElementById('btnChat').style.marginRight = "2%"    
+                            document.getElementById('btnChat').style.marginRight = "2%"
                         }
 
                         Object.entries(markers).forEach(([key,val]) => {
@@ -331,8 +334,8 @@
                     <span class="text-atribut">Debit air maksimal <span>&nbsp;&nbsp;: &nbsp;&nbsp;</span> 87 m3 per detik </span>
                 </div>
                 <span style="font-weight: 500;font-size: 14px;color: #4D4D4D;margin-top: 2%;">Pembangunan dan Cara Kerja</span>
-                <span class="deskripsi" style="margin-bottom: 2%;margin-top: 2%;">PLTA Riam Kanan atau PLTA Pangeran Muhammad Noor diresmikan pada tanggal 30 April 1973. Tercatat pengembangan PLTA Riam Kanan dilakukan pada bulan Juni 1980 hingga bulan Mei 1981. Pengembangan tersebut berupa penambahan satu unit turbin.</span>
-                <span class="deskripsi">Air dari sungai dibendung dan ditampung dalam waduk. Saat diperlukan, air dialirkan melalui pintu pengambilan air dan melalui terowongan tekan. Air melewati tangki pendatar dan mengalir melalui pipa pesat. Air akan menuju ke rumah keong yang memutar turbin. Melalui pipa lepas, ar dibuang ke saluran pembuangan. Poros turbin dihubungkan dengan poros generator sehingga energi listrik terbangkitkan. Setelah tegangan ditinggikan menggunakan tranformator utama, energi listrik disalurkan menggunakan saluran transmisi. Saluran transmisi yang digunakan adalah Saluran Udara Tegangan Tinggi. Tegangan nominal yang diterapkan pada saluran adalah 70 kiloVolt.</span>
+<!--                <span class="deskripsi" style="margin-bottom: 2%;margin-top: 2%;">PLTA Riam Kanan atau PLTA Pangeran Muhammad Noor diresmikan pada tanggal 30 April 1973. Tercatat pengembangan PLTA Riam Kanan dilakukan pada bulan Juni 1980 hingga bulan Mei 1981. Pengembangan tersebut berupa penambahan satu unit turbin.</span>-->
+<!--                <span class="deskripsi">Air dari sungai dibendung dan ditampung dalam waduk. Saat diperlukan, air dialirkan melalui pintu pengambilan air dan melalui terowongan tekan. Air melewati tangki pendatar dan mengalir melalui pipa pesat. Air akan menuju ke rumah keong yang memutar turbin. Melalui pipa lepas, ar dibuang ke saluran pembuangan. Poros turbin dihubungkan dengan poros generator sehingga energi listrik terbangkitkan. Setelah tegangan ditinggikan menggunakan tranformator utama, energi listrik disalurkan menggunakan saluran transmisi. Saluran transmisi yang digunakan adalah Saluran Udara Tegangan Tinggi. Tegangan nominal yang diterapkan pada saluran adalah 70 kiloVolt.</span>-->
             </div>
             `
             sidebar.setContent(template)
@@ -350,6 +353,26 @@
                 </div>`
             });
             document.getElementById('container-list').innerHTML = innerHtml;
+        }
+
+        function searchFunction() {
+            // Ambil nilai dari input pencarian
+            var searchText = document.getElementById('search').value.toLowerCase();
+
+            // Ambil semua elemen div yang dapat dicari
+            var divs = document.getElementsByClassName('list-item');
+
+            // Loop melalui setiap elemen div
+            for (var i = 0; i < divs.length; i++) {
+                var spanText = divs[i].getElementsByTagName('span')[0].innerText.toLowerCase();
+
+                // Periksa apakah nilai pencarian ditemukan dalam elemen span
+                if (spanText.includes(searchText)) {
+                    divs[i].classList.remove('hidden');
+                } else {
+                    divs[i].classList.add('hidden');
+                }
+            }
         }
     </script>
 </body>

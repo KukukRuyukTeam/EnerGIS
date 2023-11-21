@@ -32,22 +32,26 @@
 <div style="width: 100%;height: 80vh;margin-top: 5%;display: flex;flex-direction: column;align-items: center;">
     <span style="font-size: 38PX;font-family: Lexend;font-weight: 700;text-align: center;margin-top: 2%;">Pilih level dan uji pengetahuanmu</span>
     <div style="display: flex;align-items: center;margin-top: 2%;width: 100%;justify-content: center;gap: 1%;">
-        <div class="level" onclick="level('beginner')">
+        <div class="level" onclick="level(this,'beginner')">
             <img src="image/icon_beginner.png" width="30%">
             <span style="font-size: 38PX;font-family: Lexend;font-weight: 700;text-align: center;margin-top: 5%;">Beginner</span>
             <span style="font-size: 18PX;font-family: Lexend;font-weight: 700;text-align: center;">Mulai dari level termudah</span>
         </div>
-        <div class="level" onclick="level('intermediate')">
+        <div class="level" onclick="level(this,'intermediate')">
             <img src="image/icon_intermediate.png" width="30%">
             <span style="font-size: 38PX;font-family: Lexend;font-weight: 700;text-align: center;margin-top: 5%;">Intermediate</span>
             <span style="font-size: 18PX;font-family: Lexend;font-weight: 700;text-align: center;">Coba tantang dirimu</span>
         </div>
-        <div class="level" onclick="level('advanced')">
+        <div class="level" onclick="level(this,'advance')">
             <img src="image/icon_advanced.png" width="30%">
             <span style="font-size: 38PX;font-family: Lexend;font-weight: 700;text-align: center;margin-top: 5%;">Advanced</span>
             <span style="font-size: 18PX;font-family: Lexend;font-weight: 700;text-align: center;">Maksimalkan Kemampuanmu</span>
         </div>
     </div>
+</div>
+
+<div id="loading" style="display: none;justify-content: center;width: 100vw;height: 100vh;position: absolute;top: 0;overflow: unset">
+    <img src="image/Mohon_ditunggu.gif" width="100%">
 </div>
 
 <div style="width: 80%;margin-left: 10%;background-color: #5198F8;border-radius: 10px;height: 35vh;display: flex;justify-content: center;align-items: center;gap: 5%;margin-top: 5%;">
@@ -96,11 +100,21 @@
     sessionStorage.setItem('kode',"47590")
 
     async function createSoal(level) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Optional: Add smooth scrolling animation
+        });
+        document.getElementById('loading').style.display = 'flex';
+        document.body.style.overflow = "hidden"
+
         axios.post(`{{url("api/createquestion/")}}`, {level: level}).then(res=>{
             sessionStorage.setItem('kode',res.data.kode)
             location.href = "rangking"
         }).catch(e=>{
             console.log(e)
+
+            document.getElementById('loading').style.display = 'none';
+            alert("gagal membuat soal, silahkan coba lagi!")
         })
 
     }
@@ -119,14 +133,16 @@
         })
 
     }
-    function level(level) {
+
+    function level(button,level) {
+        const randomId = function(length = 6) {
+            return Math.random().toString(36).substring(2, length+2);
+        };
+        sessionStorage.setItem('nama', randomId(10))
         const cards = document.querySelectorAll(".level");
-        cards.forEach((card) => {
-            card.addEventListener("click", function () {
-                cards.forEach((c) => c.classList.remove("active"));
-                this.classList.add("active");
-            });
-        });
+        cards.forEach((c) => c.classList.remove("active"));
+        button.classList.add("active")
+
         // createSoal(level)
         location.href = "rangking"
     }

@@ -104,7 +104,7 @@
     getSkor().then(res => {
         for(i in res){
             if (res[i].nama == nama){
-                document.getElementById("skor").innerHTML = res[i].jumlah+"/100"
+                document.getElementById("skor").innerHTML = res[i].jumlah+"/30"
             }
         }
 
