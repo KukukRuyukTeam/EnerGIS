@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
 <div>
     <!-- He who is contented is rich. - Laozi -->
 </div>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,4 +144,3 @@
     }
 </script>
 </html>
->>>>>>> Stashed changes

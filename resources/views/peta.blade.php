@@ -20,8 +20,6 @@
     </div>
 
     <div id="map"></div>
-<<<<<<< Updated upstream
-=======
     <div>
         <div style="display: flex;flex-direction: column;border-radius: 10px;border: 2px solid #5198F8;width: 30%;justify-content: center;background-color: white;padding: 10px;margin-bottom: 1vh;position: absolute;bottom: 10%;right: 0;margin-right: 2%;" id="containerChat">
             <div id="chatContentContainer">
@@ -43,7 +41,6 @@
             <img src="image/chatButtonOpen.png" width="80%" height="80%" onclick="closeChat()" id="iconChat2" style="display: none;">
         </div>
     </div>
->>>>>>> Stashed changes
     <div class="list-view" id="list-view">
         <img width="30%" src="image/logo_biru.png" style="margin-top: 5%;cursor: pointer" onclick="location.href= '/'">
         <input type="text" id="search" onkeyup="searchFunction()" class="search" placeholder="Cari pembangkit listrik">
@@ -68,14 +65,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< Updated upstream
-        <svg xmlns="http://www.w3.org/2000/svg" id="maximize" width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;transform:rotate(180deg)" onclick="maximize()">
-            <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" id="minimize" width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;display:none" onclick="minimize()">
-            <path d="M10.3247 3.203L10.0003 2.92624L9.67578 3.203L2.66691 9.18118C2.49727 9.31965 2.25687 9.40579 1.99498 9.40384C1.73156 9.40189 1.49239 9.3112 1.32632 9.16955C1.16257 9.02988 1.08855 8.85918 1.08694 8.70095C1.08534 8.54383 1.15484 8.3741 1.31272 8.23339L9.32309 1.401C9.32311 1.40098 9.32312 1.40097 9.32314 1.40095C9.49117 1.2577 9.73379 1.16675 10.0003 1.16675C10.2667 1.16675 10.5093 1.2577 10.6774 1.40095C10.6774 1.40097 10.6774 1.40098 10.6774 1.401L18.6878 8.2334C18.8457 8.37411 18.9152 8.54384 18.9136 8.70095C18.912 8.85918 18.8379 9.02988 18.6742 9.16955C18.5081 9.3112 18.2689 9.40189 18.0055 9.40384C17.7436 9.40579 17.5033 9.31965 17.3336 9.18119L10.3247 3.203Z" stroke="#BFBFBF"/>
-        </svg>
-=======
         <div class="container-list" id="container-list"></div>
         <div style="width: 100%;height: 7vh;display: flex;justify-content: center;cursor: pointer" onclick="maximize()" id="maximize">
             <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="10" viewBox="0 0 20 10" fill="none" style="position: absolute;bottom:0;margin-bottom: 5%;transform:rotate(180deg)" >
@@ -88,15 +77,12 @@
             </svg>
         </div>
 
->>>>>>> Stashed changes
     </div>
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="{{ asset('/leaflet.js') }}"></script>
 
     <script>
-<<<<<<< Updated upstream
-=======
 
         if (sessionStorage.getItem("chat-session")) {
             const chatContent = document.getElementById('chatContentContainer')
@@ -217,7 +203,6 @@
             target.parentElement.remove()
         }
 
->>>>>>> Stashed changes
         function maximize(){
             document.getElementById("list-view").style.height = "80vh"
             document.getElementById("container-list").style.display = "flex"
@@ -262,8 +247,6 @@
                         } else {
                             sidebar.toggle();
                         }
-<<<<<<< Updated upstream
-=======
 
                         if (sidebar.isVisible()) {
                             document.getElementById('containerChat').style.marginRight = "22%"
@@ -278,7 +261,6 @@
                         })
 
                         markers[feature.properties.id].setIcon(SelectedMarkerIcon)
->>>>>>> Stashed changes
                         map.setView(layer.getLatLng())
                     })
                 },
@@ -353,17 +335,10 @@
                     </svg>
                 </div>
                 <div class="atribut">
-<<<<<<< Updated upstream
                     <span class="text-atribut" style="margin-top: 0;">Jenis Turbin <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> Turbin Francis</span>
                     <span class="text-atribut">Jenis Generator <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> Generator posisi vertikal</span>
                     <span class="text-atribut">Daya pembangkit <span style=" margin-left: 1px;">&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> 3 x 10.000 kiloWatt </span>
                     <span class="text-atribut">Debit air maksimal <span>&nbsp;&nbsp;: &nbsp;&nbsp;</span> 87 m3 per detik </span>
-=======
-                    <span class="text-atribut" style="margin-top: 0;">Jenis Turbin <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.unit_generator}</span>
-                    <span class="text-atribut">Jenis Generator <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.jenis_generator}</span>
-<!--                    <span class="text-atribut">Daya pembangkit <span style=" margin-left: 1px;">&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> 3 x 10.000 kiloWatt </span>-->
-<!--                    <span class="text-atribut">Debit air maksimal <span>&nbsp;&nbsp;: &nbsp;&nbsp;</span> 87 m3 per detik </span>-->
->>>>>>> Stashed changes
                 </div>
                 <span style="font-weight: 500;font-size: 14px;color: #4D4D4D;margin-top: 2%;">Pembangunan dan Cara Kerja</span>
 <!--                <span class="deskripsi" style="margin-bottom: 2%;margin-top: 2%;">PLTA Riam Kanan atau PLTA Pangeran Muhammad Noor diresmikan pada tanggal 30 April 1973. Tercatat pengembangan PLTA Riam Kanan dilakukan pada bulan Juni 1980 hingga bulan Mei 1981. Pengembangan tersebut berupa penambahan satu unit turbin.</span>-->
@@ -372,8 +347,6 @@
             `
             sidebar.setContent(template)
         }
-<<<<<<< Updated upstream
-=======
         function list_pembangkit_setContent(kategori, features) {
             let innerHtml = ''
             features.forEach((data) => {
@@ -407,7 +380,6 @@
                 }
             }
         }
->>>>>>> Stashed changes
     </script>
 </body>
 </html>
