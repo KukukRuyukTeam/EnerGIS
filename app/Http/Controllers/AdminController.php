@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function loginAdmin(AdminRequest $request)
     {
         // $data = $request->validated();
-        return redirect()->intended('/admin_pembangkit');
+        return redirect()->intended('/mastermind/pembangkit');
         $admin = Admin::where('email', '=', $data['email'])->first();
         if (!$admin || !Hash::check($data['password'], $admin->password)) {
             throw new HttpResponseException(response([
