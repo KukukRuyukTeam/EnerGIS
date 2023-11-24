@@ -45,17 +45,19 @@ Route::get('/result', function () {
     return view('result');
 });
 
-Route::get('/admin', function () {
-    return view('admin/login');
-});
 
-Route::get('/admin_pembangkit', function () {
-    return view('admin/admin_pembangkit_listrik');
-});
 
-Route::post('/admin/login',[\App\Http\Controllers\AdminController::class, 'loginAdmin'])->name('login.perform');
+Route::prefix('/mastermind')->group(function () {
+    
+    Route::get('/', function () {
+        return view('admin/login');
+    });
+    Route::post('/login',[\App\Http\Controllers\AdminController::class, 'loginAdmin'])->name('login.perform');
+    
+    Route::get('/pembangkit', function () {
+        return view('admin/admin_pembangkit_listrik');
+    });
 
-Route::prefix('pembangkit')->group(function () {
 });
 
 

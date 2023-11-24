@@ -37,23 +37,23 @@ Route::post('/admin',                   [\App\Http\Controllers\AdminController::
         Route::post('/plts/delete/{id}',         [\App\Http\Controllers\PLTSController::class, 'deletePLTS']);
 
         Route::post('/pltbm',                [\App\Http\Controllers\PLTBmController::class, 'insertPLTBm']);
-        Route::put('/pltbm/update/{id}',            [\App\Http\Controllers\PLTBmController::class, 'updatePLTBm']);
+        Route::post('/pltbm/update/{id}',            [\App\Http\Controllers\PLTBmController::class, 'updatePLTBm']);
         Route::post('/pltbm/delete/{id}',         [\App\Http\Controllers\PLTBmController::class, 'deletePLTBm']);
 
         Route::post('/pltm',                [\App\Http\Controllers\PLTMController::class, 'insertPLTM']);
-        Route::put('/pltm/update/{id}',            [\App\Http\Controllers\PLTMController::class, 'updatePLTM']);
+        Route::post('/pltm/update/{id}',            [\App\Http\Controllers\PLTMController::class, 'updatePLTM']);
         Route::post('/pltm/delete/{id}',         [\App\Http\Controllers\PLTMController::class, 'deletePLTM']);
 
         Route::post('/pltmh',                [\App\Http\Controllers\PLTMHController::class, 'insertPLTMH']);
-        Route::put('/pltmh/update/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
+        Route::post('/pltmh/update/{id}',            [\App\Http\Controllers\PLTMHController::class, 'updatePLTMH']);
         Route::post('/pltmh/delete/{id}',         [\App\Http\Controllers\PLTMHController::class, 'deletePLTMH']);
 
         Route::post('/pltp',                [\App\Http\Controllers\PLTPController::class, 'insertPLTP']);
-        Route::put('/pltp/update/{id}',            [\App\Http\Controllers\PLTPController::class, 'updatePLTP']);
+        Route::post('/pltp/update/{id}',            [\App\Http\Controllers\PLTPController::class, 'updatePLTP']);
         Route::post('/pltp/delete/{id}',         [\App\Http\Controllers\PLTPController::class, 'deletePLTP']);
 
         Route::post('/pltb',                [\App\Http\Controllers\PLTBController::class, 'insertPLTB']);
-        Route::put('/pltb/update/{id}',            [\App\Http\Controllers\PLTBController::class, 'updatePLTB']);
+        Route::post('/pltb/update/{id}',            [\App\Http\Controllers\PLTBController::class, 'updatePLTB']);
         Route::post('/pltb/delete/{id}',         [\App\Http\Controllers\PLTBController::class, 'deletePLTB']);
     });
 
