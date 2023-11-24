@@ -37,7 +37,7 @@ class Pembangkit extends Model
                 ]
             ],
             "properties" => [
-                "id" => $this->id,
+                "id" => $this->id_pl,
                 "name" => $this->nama,
                 'deskripsi' => $this->deskripsi,
                 'lokasi' => $this->lokasi,
@@ -79,7 +79,7 @@ class Pembangkit extends Model
     public function formatPLTP()
     {
         $format = $this->formatTemplate();
-        $format["properties"]["tipe_pembangkit"] = $this->unit_panel;
+        $format["properties"]["tipe_pembangkit"] = $this->tipe_pembangkit;
         $format["properties"]["unit_pembangkit"] = $this->unit_pembangkit;
         return $format;
     }
