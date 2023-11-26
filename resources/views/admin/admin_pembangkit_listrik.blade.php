@@ -88,7 +88,7 @@
         });
     });
     function displayImage() {
-            const input = document.getElementById('imageInput');
+            const input = document.getElementById('gambar');
             const preview = document.getElementById('previewImage');
             const label = document.getElementById('add-img-label');
 
@@ -157,8 +157,8 @@
                         <div style="display: flex;">
                             <img id="previewImage"  style="width: 20%; height: 12vh;border-radius: 10px;margin-left: 6%;display: block;" ${ dataItem.gambar && `src="{{ asset('images/${dataItem.gambar}') }}"`}/>
                             <div class="custom__image-container"></div>
-                                <label id="add-img-label" for="imageInput">+</label>
-                                <input type="file" class="input-image" id="imageInput" accept="image/*" onchange="displayImage()">
+                                <label id="add-img-label" for="gambar" style="display:none">+</label>
+                                <input type="file" class="input-image" id="gambar" name="gambar" accept="image/*" onchange="displayImage()">
                             </div>
                         </div>
                         <div class="container-input" style="margin-top: 2%;">
@@ -245,6 +245,7 @@
         btnEdit.hidden = true
         btnBatalEdit.hidden = false
         btnSelesaiEdit.hidden = false
+        document.getElementById('add-img-label').style.display=""
 
         const inputEdit = document.querySelectorAll('.input-edit')
         inputEdit.forEach(item => {
@@ -275,8 +276,8 @@
                         <div style="display: flex;">
                             <img id="previewImage"  style="width: 20%; height: 12vh;border-radius: 10px;margin-left: 6%;display: none;"/>
                             <div class="custom__image-container"></div>
-                                <label id="add-img-label" for="imageInput">+</label>
-                                <input type="file" class="input-image" id="imageInput" accept="image/*" onchange="displayImage()">
+                                <label id="add-img-label" for="gambar">+</label>
+                                <input type="file" class="input-image" id="gambar" name="gambar" accept="image/*" onchange="displayImage()">
                             </div>
                         </div>
                         <div class="container-input" style="margin-top: 2%;">
