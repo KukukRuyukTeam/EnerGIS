@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChatAIRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use OpenAI;
 
 class ChatAIController extends Controller
 {
@@ -17,7 +17,10 @@ class ChatAIController extends Controller
     {
         $config = require __DIR__.'/../../../config/openai.php';
         $this->API_KEY = $config['api_key'];
-        $this->openAI = \OpenAI::client($this->API_KEY);
+        $this->openAI = OpenAI::factory()
+            ->withApiKey($this->API_KEY)
+            ->withHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+            ->make();
         $this->prompt = [
             [
                 'role' => "system",
