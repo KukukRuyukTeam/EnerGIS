@@ -82,7 +82,7 @@
     function nextSoal() {
         btnNext.disabled = true
         nomor++
-        if (nomor == 5){
+        if (nomor == data.length){
             localStorage.setItem("userAnswer", JSON.stringify(userAnswer));
             localStorage.setItem("quizAnswer", JSON.stringify(quizAnswer));
             localStorage.setItem("soal", JSON.stringify(soal));
