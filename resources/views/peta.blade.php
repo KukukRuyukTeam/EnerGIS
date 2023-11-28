@@ -73,6 +73,7 @@
 
     <script>
 
+        let currentCategory = ""
         if (sessionStorage.getItem("chat-session")) {
             const chatContent = document.getElementById('chatContentContainer')
             const chatSessionHistory = JSON.parse(sessionStorage.getItem("chat-session"));
@@ -130,7 +131,7 @@
             inputBoxQuestion.value = ""
             inputBoxQuestion.disabled = true
             inputBoxQuestion.placeholder = "Tunggu sebentar, mengambil jawaban"
-            
+
             fetch('/api/chat', {
                 method: "POST",
                 headers: {
@@ -279,6 +280,7 @@
         };
 
         const changeCategory = async (kategori) => {
+            currentCategory = kategori;
             const data = await getContent(kategori.toLowerCase()) //request data
             Object.entries(markers).forEach(([key,val]) => {
                 markers[key].remove()
@@ -328,12 +330,21 @@
                     </svg>
                 </div>
                 <div class="atribut">
-                    <span class="text-atribut" style="margin-top: 0;">Jenis Turbin <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.unit_generator}</span>
-                    <span class="text-atribut">Jenis Generator <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.jenis_generator}</span>
-                    <span class="text-atribut">Daya pembangkit <span style=" margin-left: 1px;">&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> 3 x 10.000 kiloWatt </span>
-                    <span class="text-atribut">Debit air maksimal <span>&nbsp;&nbsp;: &nbsp;&nbsp;</span> 87 m3 per detik </span>
+                ${
+                (currentCategory == "plta")?
+                    `<span class="text-atribut" style="margin-top: 0;">Unit Generator <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${(content.unit_generator?content.unit_generator:"")}</span>
+                    <span class="text-atribut">Jenis Generator <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${(content.jenis_generator?content.jenis_generator:"")}</span>`:
+                (currentCategory == "plts")? `<span class="text-atribut" style="margin-top: 0;">Unit Panel <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.unit_panel?content.unit_panel:""}</span>`:
+                (currentCategory == "pltp")?
+                    `<span class="text-atribut" style="margin-top: 0;">Tipe Pembangkit<span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.tipe_pembangkit?content.tipe_pembangkit:""}</span>
+                    <span class="text-atribut">Unit Pembangkit <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${content.unit_pembangkit?content.unit_pembangkit:""}</span>`:
+                (currentCategory == "pltb")?
+                    `<span class="text-atribut" style="margin-top: 0;">Unit Turbin <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${(content.unit_turbin?content.unit_turbin:"")}</span>
+                    <span class="text-atribut">Tipe Turbin <span style="margin-left: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${(content.tipe_turbin?content.tipe_turbin:"")}</span>`:
+                (currentCategory == "pltbm")?
+                    `<span class="text-atribut" style="margin-top: 0;">Sumber Energi <span style="margin-left: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;</span> ${(content.sumber_energi?content.sumber_energi:"")}</span>`:""
+                }
                 </div>
-                <span style="font-weight: 500;font-size: 14px;color: #4D4D4D;margin-top: 2%;">Pembangunan dan Cara Kerja</span>
 <!--                <span class="deskripsi" style="margin-bottom: 2%;margin-top: 2%;">PLTA Riam Kanan atau PLTA Pangeran Muhammad Noor diresmikan pada tanggal 30 April 1973. Tercatat pengembangan PLTA Riam Kanan dilakukan pada bulan Juni 1980 hingga bulan Mei 1981. Pengembangan tersebut berupa penambahan satu unit turbin.</span>-->
 <!--                <span class="deskripsi">Air dari sungai dibendung dan ditampung dalam waduk. Saat diperlukan, air dialirkan melalui pintu pengambilan air dan melalui terowongan tekan. Air melewati tangki pendatar dan mengalir melalui pipa pesat. Air akan menuju ke rumah keong yang memutar turbin. Melalui pipa lepas, ar dibuang ke saluran pembuangan. Poros turbin dihubungkan dengan poros generator sehingga energi listrik terbangkitkan. Setelah tegangan ditinggikan menggunakan tranformator utama, energi listrik disalurkan menggunakan saluran transmisi. Saluran transmisi yang digunakan adalah Saluran Udara Tegangan Tinggi. Tegangan nominal yang diterapkan pada saluran adalah 70 kiloVolt.</span>-->
             </div>

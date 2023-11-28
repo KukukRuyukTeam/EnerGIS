@@ -50,8 +50,7 @@
         <span style="font-weight: 600;font-size: 24px;margin-bottom: 2%;">Bersama <span
                 style="color: #B9D7FF;">Ener</span><span style="color: #5198F8;">GIS</span> Temukan pembangkit energi terbarukan</span>
         <span style="color: #706D6D;">EnerGIS hadir untuk membantu Anda menemukan lokasi dan informasi terkait pembangkit listrik dengan energi alternatif dan charging station yang berada di Indonesia.</span>
-        <button
-            style="background-color: white;color: #91B1DB;border-radius: 20px;border-color: #91B1DB;height: 5vh;border-style: solid;width: 25%;margin-top: 5%;font-family: poppins;">
+        <button style="cursor: pointer;background-color: white;color: #91B1DB;border-radius: 20px;border-color: #91B1DB;height: 5vh;border-style: solid;width: 25%;margin-top: 5%;font-family: poppins; " onclick="location.href='tentang'">
             Lihat selengkapnya
         </button>
     </div>
@@ -63,49 +62,49 @@
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">01</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">AIR</span>
         <span class="totalListrik">3.504,02 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/plta.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">02</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">PANAS BUMI</span>
         <span class="totalListrik">579,26 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/pltp.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">03</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">MIKROHIDRO</span>
         <span class="totalListrik">45,62 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/pltm.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">04</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">MINIHIDRO</span>
         <span class="totalListrik">37,68 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/pltmh.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">05</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">SURYA</span>
         <span class="totalListrik">21,34 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/plts.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">06</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">BIOMASSA</span>
         <span class="totalListrik">0,5 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/pltbm.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
     <div class="card">
         <span style="color: #666666;font-size: 12px;margin-right: 2%;">07</span>
         <span style="margin-right: 20%;font-weight: 600;font-size: 30px;width: 20%;">ANGIN</span>
         <span class="totalListrik">0,47 MW <span style="color: #6A6A6A;">Listrik Dihasilkan</span></span>
-        <img src="image/slide 1.png" width="20%" height="70%" style="margin-right: 2%;">
+        <img src="image/pltb.png" width="20%" height="70%" style="margin-right: 2%;">
         <span class="deskripsi" style="width: 30%;color: #6A6A6A;font-size: 12px;">Pada tahun 2021, Indonesia mulai memanfaatkan Pembangkit Listrik Tenaga Air (PLTA), yang mengubah energi dari air menjadi listrik. Proses ini menggunakan potensi dan gerakan air untuk menghasilkan energi. Di tahun tersebut, tenaga air berkontribusi sekitar 8,50% dari total pasokan listrik Indonesia, yang memiliki kapasitas total 66.514 MW</span>
     </div>
 </div>
@@ -134,8 +133,7 @@
                 <img src="image/icon_github.png" width="15%">
             </div>
         </div>
-        <span style="color: white;font-weight: 600;line-height: 1.5;">Tautan<br><a style="font-weight: 200;">Pembangkit Listrik</a><br><a
-                style="font-weight: 200;">SPKLU</a><br><a style="font-weight: 200;">Chatbot</a></span>
+        <span style="color: white;font-weight: 600;line-height: 1.5;">Tautan<br><a href="pembangkit" style="font-weight: 200;text-decoration: none;cursor: pointer;color: white">Pembangkit Listrik</a><br><a href="peta" style="font-weight: 200;text-decoration: none;cursor: pointer;color: white">Chatbot</a></span>
         <span style="color: white;font-weight: 600;line-height: 1.5;">Tentang<br><a style="font-weight: 200;">Kontak</a><br><a
                 style="font-weight: 200;">Tim</a></span>
         <span style="color: white;line-height: 1.5;text-align: right;">Kukuk Ruyuk Team<br><span>Teknologi Rekayasa Perangkat Lunak</span><br><span>Sekolah Vokasi Institut Pertanian Bogor</span><br><span>Bogor, Indonesia</span></span>
