@@ -179,6 +179,7 @@ class QuizController extends Controller
                 "nama",
                 "jumlah"
             ])
+            ->orderByDesc("jumlah")
             ->get();
         return [
             "kode" => $kode,
